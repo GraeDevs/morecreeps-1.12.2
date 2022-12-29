@@ -1,4 +1,3 @@
--------------------------------------------
 Authors & Credits
 -------------------------------------------
 Freakstritch, Shawn Wilson, Grae, Kylie, 
