@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "morecreeps:floob_achievement"
+    },
+    "title": {
+      "translate": "advancements.morecreeps.title"
+    },
+    "description": {
+      "translate": "advancements.morecreeps.title.desc"
+    },
+    "background": "morecreeps:textures/advancement_background.png",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

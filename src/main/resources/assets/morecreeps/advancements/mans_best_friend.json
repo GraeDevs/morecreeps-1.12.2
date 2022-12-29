@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "morecreeps:frisbee"
+    },
+    "title": {
+      "translate": "advancements.morecreeps.mansbestfriend.title",
+      "color": "blue",
+      "bold": true
+    },
+    "description": {
+      "translate": "advancements.morecreeps.mansbestfriend.desc",
+      "color": "light_blue",
+      "italic": true
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "morecreeps:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "item": {
+          "tag": "morecreeps:frisbee",
+          "count": 1
+        }
+      }
+    }
+  }
+}
