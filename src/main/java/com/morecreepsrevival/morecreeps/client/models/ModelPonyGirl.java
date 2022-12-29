@@ -103,6 +103,11 @@ public class ModelPonyGirl extends ModelBiped
         bipedRightLeg.rotateAngleY = 0.0f;
         bipedLeftLeg.rotateAngleY = 0.0f;
 
+        this.rightfoot.rotateAngleX = this.bipedRightLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+        this.leftfoot.rotateAngleX = this.bipedLeftLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 1.4F * f1;
+        this.rightfoot.rotateAngleY = this.bipedRightLeg.rotateAngleY = 0.0F;
+        this.leftfoot.rotateAngleY = this.bipedLeftLeg.rotateAngleY = 0.0F;
+
         if (false)
         {
             bipedRightArm.rotateAngleX += -0.6283185f;

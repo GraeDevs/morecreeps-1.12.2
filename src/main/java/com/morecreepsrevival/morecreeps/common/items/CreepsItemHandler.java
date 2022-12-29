@@ -47,6 +47,8 @@ public class CreepsItemHandler
 
     public static final Item floobAchievement = new CreepsItem("floob_achievement");
 
+    public static final Item goToHellAchievement = new CreepsItem("gotohell_achievement");
+
     public static final Item zebraBody = new ItemArmorZebraBody();
 
     public static final Item zebraBoots = new ItemArmorZebraBoots();
@@ -141,6 +143,7 @@ public class CreepsItemHandler
                 money,
                 armSword,
                 floobAchievement,
+                goToHellAchievement,
                 zebraBody,
                 zebraBoots,
                 zebraHelmet,

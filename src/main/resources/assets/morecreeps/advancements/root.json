@@ -11,7 +11,7 @@
     },
     "background": "morecreeps:textures/advancement_background.png",
     "show_toast": true,
-    "announce_to_chat": true
+    "announce_to_chat": false
   },
   "criteria": {
     "tick": {
