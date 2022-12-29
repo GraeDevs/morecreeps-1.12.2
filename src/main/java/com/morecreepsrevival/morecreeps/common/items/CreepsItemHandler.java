@@ -49,6 +49,8 @@ public class CreepsItemHandler
 
     public static final Item goToHellAchievement = new CreepsItem("gotohell_achievement");
 
+    public static final Item pigWhispererAchievement = new CreepsItem("pigwhisperer_achievement");
+
     public static final Item zebraBody = new ItemArmorZebraBody();
 
     public static final Item zebraBoots = new ItemArmorZebraBoots();
@@ -144,6 +146,7 @@ public class CreepsItemHandler
                 armSword,
                 floobAchievement,
                 goToHellAchievement,
+                pigWhispererAchievement,
                 zebraBody,
                 zebraBoots,
                 zebraHelmet,

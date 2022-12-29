@@ -1,16 +1,16 @@
 {
   "display": {
     "icon": {
-      "item": "morecreeps:gotohell_achievement"
+      "item": "morecreeps:pigwhisperer_achievement"
     },
     "title": {
-      "translate": "advancements.morecreeps.gotohell.title",
-      "color": "gray",
+      "translate": "advancements.morecreeps.pigwhisperer.title",
+      "color": "gold",
       "bold": true
     },
     "description": {
-      "translate": "advancements.morecreeps.gotohell.desc",
-      "color": "light_purple",
+      "translate": "advancements.morecreeps.pigwhisperer.desc",
+      "color": "white",
       "italic": true
     },
     "show_toast": true,
@@ -20,13 +20,12 @@
   "parent": "morecreeps:root",
   "criteria": {
     "requirement": {
-      "trigger": "minecraft:entity_killed_player",
+      "trigger": "minecraft:tame_animal",
       "conditions": {
         "entity": {
-          "type": "morecreeps:preacher"
+          "type": "morecreeps:guineapig"
         }
       }
     }
   }
 }
-
