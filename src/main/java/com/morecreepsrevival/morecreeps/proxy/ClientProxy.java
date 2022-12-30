@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.proxy;
 
+import com.morecreepsrevival.morecreeps.client.particles.FxFoam;
 import com.morecreepsrevival.morecreeps.client.particles.FxPee;
 import com.morecreepsrevival.morecreeps.common.command.LevelUpTamedCreature;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
@@ -8,6 +9,7 @@ import com.morecreepsrevival.morecreeps.common.entity.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -176,5 +178,50 @@ public class ClientProxy implements IProxy
 
             Minecraft.getMinecraft().effectRenderer.addEffect(pee);
         }
+    }
+    public void foam(EntityPlayer entity) {
+        Vec3d vec3 = entity.getLookVec();
+        vec3.scale(0.5);
+        double r = Math.sqrt(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z);
+        double theta = (double)(entity.rotationPitch * 3.1415927F / 180.0F);
+        double phi = (double)(entity.rotationYaw * 3.1415927F / 180.0F);
+        double d = r * (double)(-MathHelper.sin((float)phi)) * (double)MathHelper.cos((float)theta);
+        double d1 = r * (double)(-MathHelper.sin((float)theta));
+        double d2 = r * (double)MathHelper.cos((float)phi) * (double)MathHelper.cos((float)theta);
+        double[] motion = new double[]{entity.motionX, entity.motionY, entity.motionZ};
+
+        for(int i = 0; i < 20; ++i) {
+            FxFoam foam = new FxFoam(entity.world, entity.posX + motion[0] + vec3.x, entity.posY + motion[1] + vec3.y + 1.75, entity.posZ + motion[2] + vec3.z, 1.2, 1.2, 1.2, d, d1, d2);
+            foam.multipleParticleScaleBy(5.0F);
+            foam.multiplyVelocity(3.0F);
+            Minecraft.getMinecraft().effectRenderer.addEffect(foam);
+        }
+
+    }
+
+    public void foame(EntityExtinguisherSmoke entity) {
+        Vec3d vec3 = entity.getLookVec();
+        vec3.scale(0.5);
+        double r = Math.sqrt(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z);
+        double theta = (double)(entity.rotationPitch * 3.1415927F / 180.0F);
+        double phi = (double)(entity.rotationYaw * 3.1415927F / 180.0F);
+        double d = r * (double)(-MathHelper.sin((float)phi)) * (double)MathHelper.cos((float)theta);
+        double d1 = r * (double)(-MathHelper.sin((float)theta));
+        double d2 = r * (double)MathHelper.cos((float)phi) * (double)MathHelper.cos((float)theta);
+        double random_d = Math.floor(Math.random() * 1.4 - 0.2);
+        double random_d1 = Math.floor(Math.random() * 1.4 - 0.2);
+        double random_d2 = Math.floor(Math.random() * 1.4 - 0.2);
+        d += random_d;
+        d1 += random_d1;
+        d2 += random_d2;
+        double[] motion = new double[]{entity.motionX, entity.motionY, entity.motionZ};
+
+        for(int i = 0; i < 5; ++i) {
+            FxFoam foam = new FxFoam(entity.world, entity.posX + motion[0] + vec3.x, entity.posY + motion[1] + vec3.y, entity.posZ + motion[2] + vec3.z, 1.2, 1.2, 1.2, d, d1, d2);
+            foam.multipleParticleScaleBy(2.5F);
+            foam.multiplyVelocity(1.4F);
+            Minecraft.getMinecraft().effectRenderer.addEffect(foam);
+        }
+
     }
 }
