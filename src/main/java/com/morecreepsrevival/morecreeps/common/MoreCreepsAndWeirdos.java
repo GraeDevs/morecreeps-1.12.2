@@ -161,6 +161,7 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityThief.class, "thief", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.thiefSpawnAmt), 1, 1, EnumCreatureType.MONSTER, 0xDC9E22, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityFloob.class, "floob", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.floobSpawnAmt), 1, 1, EnumCreatureType.MONSTER, 0x29FF17, 0xE5E7E4, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityRay.class, "ray", 0, 0, 0, EnumCreatureType.AMBIENT),
+                createEntity(EntityDevRay.class, "dev_ray", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntityFloobShip.class, "floobship", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.floobShipSpawnAmt), 1, 1, EnumCreatureType.MONSTER, 0xF9C41C, 0xEAF72A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityHorseHead.class, "horsehead", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.horseHeadSpawnAmt), 1, 1, EnumCreatureType.CREATURE, 0xFF07F3, 0x84653A, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityHotdog.class, "hotdog", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.hotdogSpawnAmt), 1, 2, EnumCreatureType.CREATURE, 0x7C5C32, 0x000000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),

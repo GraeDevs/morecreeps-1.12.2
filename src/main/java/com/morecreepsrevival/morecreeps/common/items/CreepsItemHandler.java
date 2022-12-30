@@ -22,7 +22,6 @@ public class CreepsItemHandler
 {
     public static final CreativeTabs creativeTab = new CreativeTabs("creepsTab")
     {
-        @Override
         public ItemStack getTabIconItem()
         {
             return new ItemStack(floobAchievement);
@@ -74,6 +73,8 @@ public class CreepsItemHandler
 
     public static final Item raygun = new ItemRaygun();
 
+    public static final Item dev_raygun = new ItemDevRaygun();
+
     public static final Item evilEgg = new ItemEvilEgg();
 
     public static final Item earthGem = new ItemEarthGem();
@@ -105,6 +106,8 @@ public class CreepsItemHandler
     public static final Item extinguisher = new ItemExtinguisher();
 
     public static final Item rayRay = new CreepsItem("rayray", true);
+
+    public static final Item dev_rayRay = new CreepsItem("dev_rayray", true);
 
     public static final Item rocket = new ItemRocket();
 
@@ -159,6 +162,7 @@ public class CreepsItemHandler
                 lolly,
                 gooDonut,
                 raygun,
+                dev_raygun,
                 evilEgg,
                 earthGem,
                 miningGem,
@@ -175,6 +179,7 @@ public class CreepsItemHandler
                 gun,
                 extinguisher,
                 rayRay,
+                dev_rayRay,
                 rocket,
                 floobRaygun,
                 limbs,

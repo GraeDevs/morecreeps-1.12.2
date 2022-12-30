@@ -19,8 +19,8 @@
   },
   "parent": "morecreeps:root",
   "criteria": {
-    "requirement": {
-      "trigger": "minecraft:entity_killed_player",
+    "preacher": {
+      "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
           "type": "morecreeps:preacher"
