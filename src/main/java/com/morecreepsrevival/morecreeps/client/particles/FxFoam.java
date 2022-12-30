@@ -1,21 +1,27 @@
 package com.morecreepsrevival.morecreeps.client.particles;
 
 import net.minecraft.client.particle.Particle;
-import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
-import net.minecraft.client.renderer.BufferBuilder;
 
 public class FxFoam extends Particle {
 
-    public FxFoam(World world, double d, double d1, double d2, float f) {
-        super(world, d, d1, d2, 0.0D, 0.0D, 0.0D);
-        setSize(0.3F, 0.3F);
+    public FxFoam(World world,double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn,double d, double d1,double d2) {
+        super(world, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
+        setSize(0.5F, 0.5F);
 
         particleRed = 1.0F;
         particleBlue = 1.0F;
         particleGreen = 1.0F;
-        particleGravity = 1.55F;
-        particleScale *= 1.2F;
+        particleGravity = 1.8F;
+        particleScale *= 1.75F;
+        particleTextureJitterX *= 1.5;
+        particleTextureJitterY *= 1.5;
+        multipleParticleScaleBy(5);
+        particleMaxAge *= 2.0;
+
+        motionX += d * 0.33999999463558197d;
+        motionY += d1 * 0.33999999463558197d;
+        motionZ += d2 * 0.33999999463558197d;
     }
 
     @Override
@@ -23,7 +29,10 @@ public class FxFoam extends Particle {
         return 2;
     }
 
-    @Override
+    //Unknown what original developer of this override was trying to accomplish. reimplemented code from the original renderParticle class to patch this class up to work.
+    //even then it does not work. I am just going to leave this entire block commented out. If someone else can figure this out please be my guest.
+    //I reverted the entire block back to how I found it.
+    /*@Override
     public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
     {
         float f6 = ((float)(this.particleTextureIndexX % 16) + super.particleTextureJitterX / 14.0F) / 16.0F;
@@ -35,5 +44,5 @@ public class FxFoam extends Particle {
         float f12 = (float)(super.prevPosY + (super.posY - super.prevPosY) * (double)partialTicks - Particle.interpPosY);
         float f13 = (float)(super.prevPosZ + (super.posZ - super.prevPosZ) * (double)partialTicks - Particle.interpPosZ);
         float f14 = this.getBrightnessForRender(partialTicks);
-    }
+    }*/
 }
