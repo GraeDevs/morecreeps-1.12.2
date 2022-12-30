@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "item": "morecreeps:gotohell_achievement"
+    },
+    "title": {
+      "translate": "advancements.morecreeps.falseidol.title",
+      "color": "gold",
+      "bold": true
+    },
+    "description": {
+      "translate": "advancements.morecreeps.falseidol.desc",
+      "color": "white",
+      "italic": true
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "morecreeps:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:entity_killed_player",
+      "conditions": {
+        "entity": {
+          "type": "morecreeps:preacher",
+          "equipment": {
+            "mainhand": {
+              "item": "morecreeps:money"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

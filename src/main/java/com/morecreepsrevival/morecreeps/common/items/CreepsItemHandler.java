@@ -29,6 +29,13 @@ public class CreepsItemHandler
         }
     };
 
+    public static final Item floobAchievement = new CreepsItem("floob_achievement");
+
+    public static final Item goToHellAchievement = new CreepsItem("gotohell_achievement");
+
+    public static final Item pigWhispererAchievement = new CreepsItem("pigwhisperer_achievement");
+
+    public static final Item theZipperAchievement = new CreepsItem("thezipper_achievement");
     public static ArmorMaterial ZEBRA_ARMOR = EnumHelper.addArmorMaterial("zebra_armor", "zebra_armor", 25, new int[] {2, 4, 6, 2}, 5, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0);
 
     public static final Item guineaPigRadio = new ItemGuineaPigRadio();
@@ -44,12 +51,6 @@ public class CreepsItemHandler
     public static final Item money = new ItemMoney();
 
     public static final Item armSword = new ItemArmSword();
-
-    public static final Item floobAchievement = new CreepsItem("floob_achievement");
-
-    public static final Item goToHellAchievement = new CreepsItem("gotohell_achievement");
-
-    public static final Item pigWhispererAchievement = new CreepsItem("pigwhisperer_achievement");
 
     public static final Item zebraBody = new ItemArmorZebraBody();
 
