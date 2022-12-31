@@ -547,7 +547,6 @@ public class CreepsSoundHandler
     public static final SoundEvent mobileSound = createSound("mobile");
 
     public static final SoundEvent medicine = createSound("medicine");
-
     public static final SoundEvent ponyGirlCellSound = createSound("ponygirlcell");
 
     public static final SoundEvent ponyGirlBuySound = createSound("ponygirlbuy");
@@ -555,6 +554,22 @@ public class CreepsSoundHandler
     public static final SoundEvent ponyGirlHurtSound = createSound("ponygirlhurt");
 
     public static final SoundEvent ponyGirlDeathSound = createSound("ponygirldeath");
+
+    public static final SoundEvent ponyGirlMoneySound = createSound("ponygirlmoney");
+
+    public static final SoundEvent ponyCloudSound = createSound("ponycloud");
+
+    public static final SoundEvent ponyGirlWaitHereSound = createSound("ponygirlwaithere");
+
+    public static final SoundEvent ponyCloudLivingSound = createSound("ponycloudliving");
+
+    public static final SoundEvent ponySound = createSound("pony");
+
+    public static final SoundEvent ponyDeathSound = createSound("ponydeath");
+
+    public static final SoundEvent ponyCloudKillSound = createSound("ponycloudkill");
+
+    public static final SoundEvent ponyPopOffSound = createSound("ponypopoff");
 
     private static SoundEvent createSound(String soundName)
     {
@@ -830,7 +845,16 @@ public class CreepsSoundHandler
                 ponyGirlCellSound,
                 ponyGirlBuySound,
                 ponyGirlHurtSound,
-                ponyGirlDeathSound
+                ponyGirlDeathSound,
+                ponyGirlHurtSound,
+                ponyGirlMoneySound,
+                ponyCloudSound,
+                ponyGirlWaitHereSound,
+                ponyCloudLivingSound,
+                ponySound,
+                ponyDeathSound,
+                ponyCloudKillSound,
+                ponyPopOffSound
         );
     }
 }

@@ -162,6 +162,21 @@ public class EntityBullet extends Entity
         return true;
     }
 
+    public void shoot(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy)
+    {
+        float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+        float f1 = -MathHelper.sin(pitch * 0.017453292F);
+        float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+        this.shoot(shooter, f, f1, f2, velocity, inaccuracy);
+        this.motionX += shooter.motionX;
+        this.motionZ += shooter.motionZ;
+
+        if (!shooter.onGround)
+        {
+            this.motionY += shooter.motionY;
+        }
+    }
+
     @Override
     public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
     {

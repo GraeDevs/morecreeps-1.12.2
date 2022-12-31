@@ -10,7 +10,7 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle'
 
-version = "1.0.21"
+version = "1.0.22"
 group = "com.morecreepsrevival.morecreeps"
 archivesBaseName = "morecreeps"
 
