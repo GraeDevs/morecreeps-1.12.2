@@ -22,13 +22,15 @@
     "requirement": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "entity": {
-          "type": "morecreeps:preacher",
+        "player": {
           "equipment": {
             "mainhand": {
-              "item": "morecreeps:money"
+              "tag": "morecreeps:money"
             }
           }
+        },
+        "entity": {
+          "type": "morecreeps:preacher"
         }
       }
     }

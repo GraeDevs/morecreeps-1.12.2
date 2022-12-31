@@ -22,10 +22,12 @@
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "tag": "morecreeps:frisbee",
-          "count": 1
-        }
+        "items": [
+          {
+            "tag": "morecreeps:frisbee",
+            "count": 1
+          }
+        ]
       }
     }
   }

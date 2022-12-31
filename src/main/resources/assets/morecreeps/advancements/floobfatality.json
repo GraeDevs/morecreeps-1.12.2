@@ -24,6 +24,9 @@
       "conditions": {
         "entity": {
           "type": "morecreeps:floob"
+        },
+        "killing_blow": {
+          "is_projectile": true
         }
       }
     }

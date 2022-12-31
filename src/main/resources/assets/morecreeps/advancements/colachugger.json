@@ -22,10 +22,15 @@
     "requirement": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "tag": "morecreeps:blorp_cola",
-          "count": 10
-        }
+        "items": [
+          {
+            "tag": "morecreeps:blorp_cola",
+            "count": {
+              "min": 10,
+              "max": 10
+            }
+          }
+        ]
       }
     }
   }
