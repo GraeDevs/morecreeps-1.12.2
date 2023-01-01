@@ -588,14 +588,13 @@ public class EntityGrow extends EntityThrowable
                             hunchbackSkeleton.growModelSize(0.2f + growBonus);
                         }
                     }
-                    // TODO: EntityInvisibleMan
-                    else if (rtr.entityHit instanceof EntityManDog)
+                    else if (rtr.entityHit instanceof EntityInvisibleMan)
                     {
-                        EntityManDog manDog = (EntityManDog)rtr.entityHit;
+                        EntityInvisibleMan invisMan = (EntityInvisibleMan)rtr.entityHit;
 
-                        if (manDog.getModelSize() < 4.0f + growMax)
+                        if (invisMan.getModelSize() < 4.0f + growMax)
                         {
-                            manDog.growModelSize(0.2f + growBonus);
+                            invisMan.growModelSize(0.2f + growBonus);
                         }
                     }
                     // TODO: EntityNonSwimmer

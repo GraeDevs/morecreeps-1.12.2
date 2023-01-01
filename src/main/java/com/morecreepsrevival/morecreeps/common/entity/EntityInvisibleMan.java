@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -31,7 +32,6 @@ import java.util.UUID;
 public class EntityInvisibleMan extends EntityCreepBase {
 
     private int angerLevel;
-    private static final ItemStack defaultHeldItem;
     private UUID angerTargetUUID;
 
     public EntityInvisibleMan(World world) {
@@ -47,6 +47,8 @@ public class EntityInvisibleMan extends EntityCreepBase {
         this.angerLevel = 0;
 
         super.setTexture("textures/entity/invisibleman.png");
+
+        setHeldItem(EnumHand.MAIN_HAND, new ItemStack(Items.STICK));
 
         updateAttributes();
 
@@ -127,19 +129,14 @@ public class EntityInvisibleMan extends EntityCreepBase {
 
     private void becomeAngryAt(Entity entity) {
         this.setAttackTarget((EntityLivingBase)entity);
-        angerLevel = 40 + rand.nextInt(40);
+        angerLevel += 40 + rand.nextInt(40);
         this.setTexture("textures/entity/invisiblemanmad.png");
-    }
-
-    protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
-    {
-        this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.STICK));
     }
 
     public void onUpdate() {
         super.onUpdate();
         if(angerLevel == 0) {
-            //this.setTexture("textures/entity/invisibleman.png");
+            this.setTexture("textures/entity/invisibleman.png");
         }
     }
 
@@ -149,16 +146,6 @@ public class EntityInvisibleMan extends EntityCreepBase {
         if(isAngry()) {
             --angerLevel;
         }
-    }
-
-
-    public ItemStack getHeldItem()
-    {
-        return defaultHeldItem;
-    }
-
-    static {
-        defaultHeldItem = new ItemStack(Items.STICK, 1);
     }
 
     public boolean isAngry()
@@ -182,5 +169,12 @@ public class EntityInvisibleMan extends EntityCreepBase {
     protected SoundEvent getDeathSound()
     {
         return CreepsSoundHandler.invisibleManDeath;
+    }
+
+    @Override
+    protected void dropItemsOnDeath()
+    {
+        dropItem(Items.STICK, 3);
+        dropItem(Items.APPLE, 1);
     }
 }

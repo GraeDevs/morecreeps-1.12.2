@@ -854,7 +854,12 @@ public class CreepsSoundHandler
                 ponySound,
                 ponyDeathSound,
                 ponyCloudKillSound,
-                ponyPopOffSound
+                ponyPopOffSound,
+                invisibleManSound,
+                invisibleManAngry,
+                invisibleManDeath,
+                invisibleManForget,
+                invisibleManHurt
         );
     }
 }

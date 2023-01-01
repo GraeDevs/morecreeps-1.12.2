@@ -46,6 +46,7 @@ item.morecreeps.battery.name=Battery
 item.morecreeps.ram16k.name=16K RAM
 item.morecreeps.mobile_phone.name=Mobile Phone
 item.morecreeps.lucky_dress.name=Lucky Dress
+item.morecreeps.medicine.name=Medicine
 
 # Entities
 entity.morecreeps.guineapig.name=Guinea Pig
