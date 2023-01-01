@@ -136,7 +136,7 @@ public class EntityInvisibleMan extends EntityCreepBase {
     public void onUpdate() {
         super.onUpdate();
         if(angerLevel == 0) {
-            this.setTexture("textures/entity/invisibleman.png");
+            //this.setTexture("textures/entity/invisibleman.png");
         }
     }
 
