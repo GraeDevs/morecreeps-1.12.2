@@ -19,14 +19,17 @@
   },
   "parent": "morecreeps:root",
   "criteria": {
-    "requirement": {
+    "vaporize_floob": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
           "type": "morecreeps:floob"
         },
         "killing_blow": {
-          "is_projectile": true
+          "is_projectile": true,
+          "direct_entity": {
+            "type": "morecreeps:ray"
+          }
         }
       }
     }

@@ -19,13 +19,14 @@
   },
   "parent": "morecreeps:root",
   "criteria": {
-    "requirement": {
+    "kill_preacher_with_money": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "player": {
           "equipment": {
             "mainhand": {
-              "tag": "morecreeps:money"
+              "tag": "morecreeps:money",
+              "count": 1
             }
           }
         },
@@ -34,6 +35,14 @@
         }
       }
     }
+  },
+  "requirements": [
+    [
+      "kill_preacher_with_money"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
   }
 }
 
