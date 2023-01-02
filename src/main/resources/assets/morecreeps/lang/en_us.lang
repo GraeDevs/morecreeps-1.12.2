@@ -47,6 +47,7 @@ item.morecreeps.ram16k.name=16K RAM
 item.morecreeps.mobile_phone.name=Mobile Phone
 item.morecreeps.lucky_dress.name=Lucky Dress
 item.morecreeps.medicine.name=Medicine
+item.morecreeps.pee_bucket.name=Pee Bucket
 
 # Entities
 entity.morecreeps.guineapig.name=Guinea Pig
@@ -100,6 +101,7 @@ entity.morecreeps.evilsnowman.name=Evil Snowman
 entity.morecreeps.growbot_gregg.name=Growbot Gregg
 entity.morecreeps.ponygirl.name=Pony Girl
 entity.morecreeps.invisible_man.name=Invisible Man
+entity.morecreeps.rock_monster.name=Rock Monster
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

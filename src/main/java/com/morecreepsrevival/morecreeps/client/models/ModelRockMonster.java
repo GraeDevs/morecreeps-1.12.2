@@ -1,14 +1,11 @@
 package com.morecreepsrevival.morecreeps.client.models;
 
-import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-import javax.annotation.Nonnull;
-
-public class ModelFloob extends ModelBiped
-{
+public class ModelRockMonster extends ModelBase {
     public ModelRenderer bipedHead;
     public ModelRenderer bipedHeadwear;
     public ModelRenderer bipedBody;
@@ -18,86 +15,79 @@ public class ModelFloob extends ModelBiped
     public ModelRenderer bipedLeftLeg;
     public ModelRenderer bipedEars;
     public ModelRenderer bipedCloak;
-    public ModelRenderer leftEye;
-    public ModelRenderer rightEye;
 
-    public boolean heldItemLeft = false;
+    /**
+     * Records whether the model should be rendered holding an item in the left hand, and if that item is a block.
+     */
+    public boolean heldItemLeft;
 
-    public boolean heldItemRight = false;
+    /**
+     * Records whether the model should be rendered holding an item in the right hand, and if that item is a block.
+     */
+    public boolean heldItemRight;
+    public boolean isSneak;
 
-    public boolean isSneak = false;
-
-    public ModelFloob()
+    public ModelRockMonster()
     {
-        this(0.0f);
+        this(0.0F);
     }
 
-    public ModelFloob(float f)
+    public ModelRockMonster(float f)
     {
-        this(f, 0.0f);
+        this(f, 0.0F);
     }
 
-    public ModelFloob(float f, float f1)
+    public ModelRockMonster(float f, float f1)
     {
-        bipedCloak = new ModelRenderer(this, 0, 0);
-        bipedCloak.addBox(-5F, 0.0F, -1F, 10, 16, 1, f);
-        bipedEars = new ModelRenderer(this, 24, 0);
-        bipedEars.addBox(-3F, -6F, -1F, 6, 6, 1, f);
-        bipedHead = new ModelRenderer(this, 0, 0);
-        bipedHead.addBox(-3F, -12F, -3F, 6, 12, 6, f);
-        bipedHead.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+        heldItemLeft = false;
+        heldItemRight = false;
+        isSneak = false;
+        bipedHead = new ModelRenderer(this, 0, 4);
+        bipedHead.addBox(4F, -8F, -4F, 8, 8, 8, f);
+        bipedHead.setRotationPoint(-5F, 0.0F + f1, 0.0F);
         bipedHeadwear = new ModelRenderer(this, 32, 0);
-        bipedHeadwear.addBox(-4F, -8F, -4F, 8, 8, 8, f + 0.5F);
-        bipedHeadwear.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
+        bipedHeadwear.addBox(-4F, -8F, -4F, 8, 1, 1, f + 0.5F);
+        bipedHeadwear.setRotationPoint(3F, 2.0F + f1, 0.0F);
         bipedBody = new ModelRenderer(this, 16, 16);
-        bipedBody.addBox(-4F, 0.0F, -2F, 8, 8, 4, f);
+        bipedBody.addBox(-4F, 0.0F, -6F, 14, 14, 14, f);
         bipedBody.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
-        leftEye = new ModelRenderer(this, 32, 0);
-        leftEye.addBox(-2.2F, -10F, -5F, 2, 2, 2, f - 0.3F);
-        leftEye.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
-        rightEye = new ModelRenderer(this, 32, 0);
-        rightEye.addBox(0.2F, -10F, -5F, 2, 2, 2, f - 0.3F);
-        rightEye.setRotationPoint(0.0F, 0.0F + f1, 0.0F);
         bipedRightArm = new ModelRenderer(this, 40, 16);
-        bipedRightArm.addBox(-1.5F, -2F, -2F, 3, 12, 3, f - 0.4F);
-        bipedRightArm.setRotationPoint(-1F, 2.0F + f1, 0.0F);
+        bipedRightArm.addBox(-3F, -2F, -2F, 7, 10, 6, f);
+        bipedRightArm.setRotationPoint(-2F, 2.0F + f1, 0.0F);
         bipedLeftArm = new ModelRenderer(this, 40, 16);
         bipedLeftArm.mirror = true;
-        bipedLeftArm.addBox(-1.5F, -2F, -2F, 3, 12, 3, f - 0.4F);
-        bipedLeftArm.setRotationPoint(3F, 2.0F + f1, 0.0F);
-        bipedRightLeg = new ModelRenderer(this, 0, 18);
-        bipedRightLeg.addBox(-2F, -4F, -2F, 3, 16, 3, f);
-        bipedRightLeg.setRotationPoint(-2F, 8F + f1, 0.0F);
-        bipedLeftLeg = new ModelRenderer(this, 0, 18);
+        bipedLeftArm.addBox(3F, -2F, -2F, 7, 10, 6, f);
+        bipedLeftArm.setRotationPoint(2.0F, 2.0F + f1, 0.0F);
+        bipedRightLeg = new ModelRenderer(this, 0, 24);
+        bipedRightLeg.addBox(-2F, 0.0F, -4F, 9, 12, 10, f);
+        bipedRightLeg.setRotationPoint(-6F, 18F + f1, 0.0F);
+        bipedLeftLeg = new ModelRenderer(this, 0, 24);
         bipedLeftLeg.mirror = true;
-        bipedLeftLeg.addBox(-2F, -4F, -2F, 3, 16, 3, f);
-        bipedLeftLeg.setRotationPoint(3F, 8F + f1, 0.0F);
+        bipedLeftLeg.addBox(-2F, 0.0F, -4F, 9, 12, 10, f);
+        bipedLeftLeg.setRotationPoint(6F, 18F + f1, 0.0F);
     }
 
-    @Override
-    public void render(@Nonnull Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    /**
+     * Sets the models various rotation angles then renders the model.
+     */
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
-        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+        setRotationAngles(f, f1, f2, f3, f4, f5);
         bipedHead.render(f5);
         bipedBody.render(f5);
         bipedRightArm.render(f5);
         bipedLeftArm.render(f5);
         bipedRightLeg.render(f5);
         bipedLeftLeg.render(f5);
-        leftEye.render(f5);
-        rightEye.render(f5);
+        bipedHeadwear.render(f5);
     }
 
-    @Override
-    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, @Nonnull Entity entity)
+    /**
+     * Sets the models various rotation angles.
+     */
+    public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5)
     {
-        bipedHead.rotateAngleY = f3 / (180F / (float)Math.PI);
         bipedHead.rotateAngleX = f4 / (180F / (float)Math.PI);
-        leftEye.rotateAngleY = f3 / (180F / (float)Math.PI);
-        leftEye.rotateAngleX = f4 / (180F / (float)Math.PI);
-        rightEye.rotateAngleY = f3 / (180F / (float)Math.PI);
-        rightEye.rotateAngleX = f4 / (180F / (float)Math.PI);
-        bipedHeadwear.rotateAngleY = bipedHead.rotateAngleY;
         bipedHeadwear.rotateAngleX = bipedHead.rotateAngleX;
         bipedRightArm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 2.0F * f1 * 0.5F;
         bipedLeftArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
@@ -141,7 +131,7 @@ public class ModelFloob extends ModelBiped
             bipedLeftArm.rotationPointX = MathHelper.cos(bipedBody.rotateAngleY) * 5F;
             bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
             bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
-            bipedLeftArm.rotateAngleX += bipedBody.rotateAngleX;
+            bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
             f6 = 1.0F - swingProgress;
             f6 *= f6;
             f6 *= f6;
@@ -180,6 +170,20 @@ public class ModelFloob extends ModelBiped
         bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
         bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
         bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
-        bipedRightArm.rotateAngleX = 55F;
     }
+
+    public void renderEars(float f)
+    {
+        bipedEars.rotateAngleY = bipedHead.rotateAngleY;
+        bipedEars.rotateAngleX = bipedHead.rotateAngleX;
+        bipedEars.rotationPointX = 0.0F;
+        bipedEars.rotationPointY = 0.0F;
+        bipedEars.render(f);
+    }
+
+    public void renderCloak(float f)
+    {
+        bipedCloak.render(f);
+    }
+
 }

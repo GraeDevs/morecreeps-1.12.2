@@ -36,11 +36,6 @@
       }
     }
   },
-  "requirements": [
-    [
-      "kill_preacher_with_money"
-    ]
-  ],
   "rewards": {
     "experience": 50
   }
