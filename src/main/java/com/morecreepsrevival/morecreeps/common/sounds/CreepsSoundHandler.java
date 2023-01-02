@@ -573,11 +573,6 @@ public class CreepsSoundHandler
 
     public static final SoundEvent ponyDrink = createSound("ponydrink");
 
-    public static final SoundEvent rockMonster = createSound("rockmonster");
-
-    public static final SoundEvent rockMonsterDeath = createSound("rockmonsterdeath");
-
-    public static final SoundEvent rockMonsterHurt = createSound("rockmonsterhurt");
 
     private static SoundEvent createSound(String soundName)
     {
@@ -868,10 +863,7 @@ public class CreepsSoundHandler
                 invisibleManAngry,
                 invisibleManDeath,
                 invisibleManForget,
-                invisibleManHurt,
-                rockMonster,
-                rockMonsterDeath,
-                rockMonsterHurt
+                invisibleManHurt
         );
     }
 }

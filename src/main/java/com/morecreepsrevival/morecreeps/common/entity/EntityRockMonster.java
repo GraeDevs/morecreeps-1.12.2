@@ -22,9 +22,9 @@ public class EntityRockMonster extends EntityCreepBase {
         setCreepTypeName("Rock Monster");
 
         setSize(2f, 2f);
-        getEntityBoundingBox().offset(0d, 0d, 1d); // were fixing hitbox position
+        getEntityBoundingBox().offset(0d, 0d, 2d); // were fixing hitbox position
 
-        baseSpeed = 0.75d;
+        baseSpeed = 0.55d;
         baseHealth = 60f;
 
         experienceValue = 10;
@@ -111,7 +111,7 @@ public class EntityRockMonster extends EntityCreepBase {
                     this.rockM.attackEntityAsMob(entitylivingbase);// or entitylivingbase.attackEntityFrom blablabla...
                 }
 
-                this.rockM.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 1.0D);
+                this.rockM.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.75D);
             }
             else if (d0 < 256.0D)
             {
@@ -121,23 +121,5 @@ public class EntityRockMonster extends EntityCreepBase {
 
             }
         }
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound()
-    {
-        return CreepsSoundHandler.rockMonster;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource)
-    {
-        return CreepsSoundHandler.rockMonsterHurt;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound()
-    {
-        return CreepsSoundHandler.rockMonsterDeath;
     }
 }
