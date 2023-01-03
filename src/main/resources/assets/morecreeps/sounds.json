@@ -5882,6 +5882,15 @@
 			}
 		]
 	},
+	"ponydrink": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "morecreeps:ponydrink",
+				"stream": false
+			}
+		]
+	},
 	"ponycloudkill": {
 		"category": "master",
 		"sounds": [

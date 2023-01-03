@@ -137,10 +137,13 @@ public class CreepsItemHandler
 
     public static final Item luckyDress = new ItemLuckyDress();
 
+    public static final Item peeBucket = new ItemPeeBuck();
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         event.getRegistry().registerAll(
+                peeBucket,
                 guineaPigRadio,
                 lifeGem,
                 bandaid,

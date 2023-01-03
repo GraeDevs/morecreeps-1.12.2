@@ -1,5 +1,6 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
@@ -70,11 +71,15 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityRobotTodd.class, true));
     }
-
     @Override
     public float getEyeHeight()
     {
         return 2.0f;
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
     }
 
     @Override

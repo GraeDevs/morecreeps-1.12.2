@@ -143,13 +143,15 @@ public class ClientProxy implements IProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntityCamelJockey.class, new RenderCamelJockeyFactory());
 
-        //RenderingRegistry.registerEntityRenderingHandler(EntityPonyGirl.class, new RenderPonyGirlFactory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityPonyGirl.class, new RenderPonyGirlFactory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInvisibleMan.class, new RenderInvisibleManFactory());
-//These lines were erroring, so I commented them out for further testing of the extinguisher -Darkly
-        //RenderingRegistry.registerEntityRenderingHandler(EntityPonyCloud.class, new RenderPonyCloudFactory());
 
-        //RenderingRegistry.registerEntityRenderingHandler(EntityPony.class, new RenderPonyFactory());
+        RenderingRegistry.registerEntityRenderingHandler(EntityPonyCloud.class, new RenderPonyCloudFactory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityPony.class, new RenderPonyFactory());
+
+        RenderingRegistry.registerEntityRenderingHandler(EntityRockMonster.class, new RenderRockMonsterFactory());
     }
 
     @Override

@@ -19,12 +19,12 @@
   },
   "parent": "morecreeps:root",
   "criteria": {
-    "requirement": {
+    "cola_chugger": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "morecreeps:blorp_cola",
+            "item": "morecreeps:blorp_cola",
             "count": {
               "min": 10,
               "max": 10
@@ -33,5 +33,10 @@
         ]
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "cola_chugger"
+    ]
+  ]
 }

@@ -9,6 +9,7 @@
     "logoFile": "assets/morecreeps/textures/logo.png",
     "authorList": ["Freakstritch", "Shawn M. Wilson", "Grae"],
     "credits": "Thanks to everyone supporting the project!",
+    "logoFile": "morecreeps_logo.png",
     "updateJSON": "https://www.morecreepsrevival.com/update.json"
   }
 ]

@@ -2,6 +2,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.config.MoreCreepsConfig;
+import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -269,6 +270,8 @@ public class EntityBum extends EntityCreepBase implements IMob
                         playSound(CreepsSoundHandler.bumThanksSound, getSoundVolume(), getSoundPitch());
 
                         setTimeToPee(rand.nextInt(1900) + 1500);
+
+                        dropItem(CreepsItemHandler.peeBucket, 1);
 
                         itemStack.shrink(1);
                     }
