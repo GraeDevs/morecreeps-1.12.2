@@ -143,13 +143,13 @@ public class ClientProxy implements IProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntityCamelJockey.class, new RenderCamelJockeyFactory());
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityPonyGirl.class, new RenderPonyGirlFactory());
+        //RenderingRegistry.registerEntityRenderingHandler(EntityPonyGirl.class, new RenderPonyGirlFactory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInvisibleMan.class, new RenderInvisibleManFactory());
+//These lines were erroring, so I commented them out for further testing of the extinguisher -Darkly
+        //RenderingRegistry.registerEntityRenderingHandler(EntityPonyCloud.class, new RenderPonyCloudFactory());
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityPonyCloud.class, new RenderPonyCloudFactory());
-
-        RenderingRegistry.registerEntityRenderingHandler(EntityPony.class, new RenderPonyFactory());
+        //RenderingRegistry.registerEntityRenderingHandler(EntityPony.class, new RenderPonyFactory());
     }
 
     @Override
@@ -187,14 +187,17 @@ public class ClientProxy implements IProxy
         Vec3d vec3 = entity.getLookVec();
         vec3.scale(0.5);
         double r = Math.sqrt(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z);
-        double theta = (double)(entity.rotationPitch * 3.1415927F / 180.0F);
-        double phi = (double)(entity.rotationYaw * 3.1415927F / 180.0F);
+        //theta and phi are variables used in the below algorithm to convert the given polar coordinates that the camera yaw and pitch gives us
+        //into actual cartesian plane coordinates. I copied the work already done in the bullet entity class to give the correct algorithm
+        double theta = (entity.rotationPitch * 3.1415927F / 180.0F);
+        double phi = (entity.rotationYaw * 3.1415927F / 180.0F);
         double d = r * (double)(-MathHelper.sin((float)phi)) * (double)MathHelper.cos((float)theta);
         double d1 = r * (double)(-MathHelper.sin((float)theta));
         double d2 = r * (double)MathHelper.cos((float)phi) * (double)MathHelper.cos((float)theta);
+        //using motion on the xyz plane to make sure the particles spawn in the correct location relative to the player.
         double[] motion = new double[]{entity.motionX, entity.motionY, entity.motionZ};
 
-        for(int i = 0; i < 20; ++i) {
+        for(int i = 0; i < 15; ++i) {
             FxFoam foam = new FxFoam(entity.world, entity.posX + motion[0] + vec3.x, entity.posY + motion[1] + vec3.y + 1.75, entity.posZ + motion[2] + vec3.z, 1.2, 1.2, 1.2, d, d1, d2);
             foam.multipleParticleScaleBy(5.0F);
             foam.multiplyVelocity(3.0F);
@@ -207,8 +210,8 @@ public class ClientProxy implements IProxy
         Vec3d vec3 = entity.getLookVec();
         vec3.scale(0.5);
         double r = Math.sqrt(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z);
-        double theta = (double)(entity.rotationPitch * 3.1415927F / 180.0F);
-        double phi = (double)(entity.rotationYaw * 3.1415927F / 180.0F);
+        double theta = (entity.rotationPitch * 3.1415927F / 180.0F);
+        double phi = (entity.rotationYaw * 3.1415927F / 180.0F);
         double d = r * (double)(-MathHelper.sin((float)phi)) * (double)MathHelper.cos((float)theta);
         double d1 = r * (double)(-MathHelper.sin((float)theta));
         double d2 = r * (double)MathHelper.cos((float)phi) * (double)MathHelper.cos((float)theta);
