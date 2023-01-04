@@ -122,4 +122,10 @@ public class EntityRockMonster extends EntityCreepBase {
             }
         }
     }
+
+    @Override
+    protected SoundEvent getAmbientSound()
+    {
+        return CreepsSoundHandler.tedInsultSound;
+    }
 }

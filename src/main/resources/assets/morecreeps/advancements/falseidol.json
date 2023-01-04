@@ -19,19 +19,25 @@
   },
   "parent": "morecreeps:root",
   "criteria": {
-    "kill_preacher_with_money": {
+    "requirement": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
-        "player": {
-          "equipment": {
-            "mainhand": {
-              "tag": "morecreeps:money",
-              "count": 1
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "morecreeps:preacher"
             }
           }
-        },
-        "entity": {
-          "type": "morecreeps:preacher"
+        ],
+        "killing_blow": {
+          "direct_entity": {
+            "equipment": {
+              "mainhand": {
+                "item": "morecreeps:money"
+              }
+            }
+          }
         }
       }
     }

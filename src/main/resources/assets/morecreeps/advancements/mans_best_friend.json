@@ -24,7 +24,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "morecreeps:frisbee",
+            "item": "morecreeps:frisbee",
             "count": 1
           }
         ]
