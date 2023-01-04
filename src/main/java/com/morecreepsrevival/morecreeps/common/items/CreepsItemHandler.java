@@ -117,6 +117,8 @@ public class CreepsItemHandler
 
     public static final Item bulletBullet = new CreepsItem("bulletbullet", true);
 
+    public static final Item smoke = new CreepsItem("smoke", true);
+
     public static final Item growRay = new ItemGrowRay();
 
     public static final Item zebraHide = new ItemZebraHide();
@@ -184,6 +186,7 @@ public class CreepsItemHandler
                 rayRay,
                 dev_rayRay,
                 rocket,
+                smoke,
                 floobRaygun,
                 limbs,
                 bulletBullet,

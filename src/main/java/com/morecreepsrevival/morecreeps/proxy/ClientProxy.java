@@ -97,6 +97,8 @@ public class ClientProxy implements IProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, new RenderCreepsItemFactory(CreepsItemHandler.bulletBullet));
 
+        RenderingRegistry.registerEntityRenderingHandler(EntityExtinguisherSmoke.class, new RenderCreepsItemFactory(CreepsItemHandler.smoke));
+
         RenderingRegistry.registerEntityRenderingHandler(EntitySnowDevil.class, new RenderSnowDevilFactory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityEvilChicken.class, new RenderEvilChickenFactory());
@@ -147,7 +149,7 @@ public class ClientProxy implements IProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInvisibleMan.class, new RenderInvisibleManFactory());
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityPonyCloud.class, new RenderPonyCloudFactory());
+        //RenderingRegistry.registerEntityRenderingHandler(EntityPonyCloud.class, new RenderPonyCloudFactory());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityPony.class, new RenderPonyFactory());
 
@@ -189,17 +191,22 @@ public class ClientProxy implements IProxy
         Vec3d vec3 = entity.getLookVec();
         vec3.scale(0.5);
         double r = Math.sqrt(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z);
-        double theta = (double)(entity.rotationPitch * 3.1415927F / 180.0F);
-        double phi = (double)(entity.rotationYaw * 3.1415927F / 180.0F);
+        //theta and phi are variables used in the below algorithm to convert the given polar coordinates that the camera yaw and pitch gives us
+        //into actual cartesian plane coordinates. I copied the work already done in the bullet entity class to give the correct algorithm
+        double theta = (entity.rotationPitch * 3.1415927F / 180.0F);
+        double phi = (entity.rotationYaw * 3.1415927F / 180.0F);
         double d = r * (double)(-MathHelper.sin((float)phi)) * (double)MathHelper.cos((float)theta);
         double d1 = r * (double)(-MathHelper.sin((float)theta));
         double d2 = r * (double)MathHelper.cos((float)phi) * (double)MathHelper.cos((float)theta);
+        //using motion on the xyz plane to make sure the particles spawn in the correct location relative to the player.
         double[] motion = new double[]{entity.motionX, entity.motionY, entity.motionZ};
+        //System.out.println("Player RotationYaw: " + entity.rotationYaw);
+        //System.out.println("Player RotationPitch: " + entity.rotationPitch);
 
-        for(int i = 0; i < 20; ++i) {
+        for(int i = 0; i < 5; ++i) {
             FxFoam foam = new FxFoam(entity.world, entity.posX + motion[0] + vec3.x, entity.posY + motion[1] + vec3.y + 1.75, entity.posZ + motion[2] + vec3.z, 1.2, 1.2, 1.2, d, d1, d2);
-            foam.multipleParticleScaleBy(5.0F);
-            foam.multiplyVelocity(3.0F);
+            foam.multipleParticleScaleBy(0.5F);
+            foam.multiplyVelocity(0.5F);
             Minecraft.getMinecraft().effectRenderer.addEffect(foam);
         }
 
@@ -208,24 +215,24 @@ public class ClientProxy implements IProxy
     public void foame(EntityExtinguisherSmoke entity) {
         Vec3d vec3 = entity.getLookVec();
         vec3.scale(0.5);
-        double r = Math.sqrt(vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z);
-        double theta = (double)(entity.rotationPitch * 3.1415927F / 180.0F);
-        double phi = (double)(entity.rotationYaw * 3.1415927F / 180.0F);
-        double d = r * (double)(-MathHelper.sin((float)phi)) * (double)MathHelper.cos((float)theta);
-        double d1 = r * (double)(-MathHelper.sin((float)theta));
-        double d2 = r * (double)MathHelper.cos((float)phi) * (double)MathHelper.cos((float)theta);
-        double random_d = Math.floor(Math.random() * 1.4 - 0.2);
-        double random_d1 = Math.floor(Math.random() * 1.4 - 0.2);
-        double random_d2 = Math.floor(Math.random() * 1.4 - 0.2);
+        double theta = (entity.rotationPitch * 3.1415927F / 180.0F);
+        double phi = (entity.rotationYaw * 3.1415927F / 180.0F);
+        double d = (double)(-MathHelper.sin((float)phi)) * (double)MathHelper.cos((float)theta);
+        double d1 = (-MathHelper.sin((float)theta));
+        double d2 = (double)MathHelper.cos((float)phi) * (double)MathHelper.cos((float)theta);
+        double random_d = Math.floor(Math.random() * 1.4 - 0.3);
+        double random_d1 = Math.floor(Math.random() * 1.4 - 0.3);
+        double random_d2 = Math.floor(Math.random() * 1.4 - 0.3);
         d += random_d;
         d1 += random_d1;
         d2 += random_d2;
-        double[] motion = new double[]{entity.motionX, entity.motionY, entity.motionZ};
+        //System.out.println("Ent RotationYaw: " + entity.rotationYaw);
+        //System.out.println("Ent RotationPitch: " + entity.rotationPitch);
 
         for(int i = 0; i < 5; ++i) {
-            FxFoam foam = new FxFoam(entity.world, entity.posX + motion[0] + vec3.x, entity.posY + motion[1] + vec3.y, entity.posZ + motion[2] + vec3.z, 1.2, 1.2, 1.2, d, d1, d2);
-            foam.multipleParticleScaleBy(2.5F);
-            foam.multiplyVelocity(1.4F);
+            FxFoam foam = new FxFoam(entity.world, entity.posX, entity.posY, entity.posZ, 1.2, 1.2, 1.2, d, d1, d2);
+            foam.multipleParticleScaleBy(0.75F);
+            foam.multiplyVelocity(0.5F);
             Minecraft.getMinecraft().effectRenderer.addEffect(foam);
         }
 
