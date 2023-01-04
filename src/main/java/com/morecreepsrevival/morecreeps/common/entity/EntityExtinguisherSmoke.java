@@ -6,11 +6,22 @@ import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.network.play.server.SPacketChangeGameState;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Nullable;
 
@@ -29,6 +40,9 @@ public class EntityExtinguisherSmoke extends EntityThrowable
     private int zTile;
     protected double initialVelocity;
     private Entity user;
+    private int groundTicks;
+    public int DECAY;
+    private double damage;
 
     public EntityExtinguisherSmoke(World world) {
         super(world);
@@ -36,169 +50,215 @@ public class EntityExtinguisherSmoke extends EntityThrowable
         this.xTile = -1;
         this.yTile = -1;
         this.zTile = -1;
+        this.damage = 5.0;
     }
     public EntityExtinguisherSmoke(World world, Entity entity)
     {
-
         this(world);
-        setSize(0.0f, 0.0f);
+        DECAY = 35;
+        setSize(0.25f, 0.25f);
         user = entity;
         isImmuneToFire = true;
-        double theta = (entity.rotationPitch) * (float)Math.PI / 180.0f;
-        double phi = entity.rotationYaw * (float)Math.PI / 180.0f;
-        double d = -MathHelper.sin((float)phi) * MathHelper.cos((float)theta) ;
-        double d1 = MathHelper.sin((float)theta);
-        double d2 = MathHelper.cos((float)phi) * MathHelper.cos((float)theta);
-        double[] motion = {entity.motionX, entity.motionY, entity.motionZ};
-        Vec3d vec3 = entity.getLookVec();
-        vec3.scale(0.5);
-
-        setPosition(entity.posX + motion[0] + vec3.x,  entity.posY + motion[1] + vec3.y + 1.75, entity.posZ + motion[2] + vec3.z);
-
+        setRotation(entity.rotationYaw, 0.0f);
+        double d = -MathHelper.sin((entity.rotationYaw * (float)Math.PI) / 180F);
+        double d1 = (-MathHelper.sin(entity.rotationPitch * (float)Math.PI) / 90F);
+        double d2 = MathHelper.cos((entity.rotationYaw * (float)Math.PI) / 180F);
+        motionX = 0.49999999999999996D * d * (double)MathHelper.cos((entity.rotationPitch / 180F) * (float)Math.PI);
+        motionY = -0.60000000000000004D * (double)MathHelper.sin((entity.rotationPitch / 180F) * (float)Math.PI);
+        motionZ = 0.49999999999999996D * d2 * (double)MathHelper.cos((entity.rotationPitch / 180F) * (float)Math.PI);
+        setPosition(entity.posX + d * 0.40000000000000004D, entity.posY + 1.5d + d1 * 0.40000000000000004D, entity.posZ + d2 * 0.40000000000000004D);
+        prevPosX = posX;
+        prevPosY = posY;
+        prevPosZ = posZ;
         rotationYaw = entity.rotationYaw;
         rotationPitch = entity.rotationPitch;
-
-        motionX += d * 0.33999999463558197d;
-        motionY += d1 * 0.33999999463558197d;
-        motionZ += d2 * 0.33999999463558197d;
     }
 
+private void extinguish_behaviour(ArrayList<Entity> entities) {
+    for (Entity entity : entities) {
+            entity.extinguish();
+    }
+}
+private void extinguish_blocks(int xtile,int ytile, int ztile,int radius) {
+    //The code below is an algorithm for searching through a radius of blocks. the three for loops are where the functionality lie
+    //yeah, 3 for loops :/.
+    int killChance = ThreadLocalRandom.current().nextInt(0, 100 + 1);
+    int lX = xtile - radius;
+    int lY = ytile - radius;
+    int lZ = ztile - radius;
+    int hX = xtile + radius;
+    int hY = ytile + radius;
+    int hZ = ztile + radius;
+    for (int cX = lX; cX <= hX; cX++) {
+        for (int cY = lY; cY <= hY; cY++) {
+            for (int cZ = lZ; cZ <= hZ; cZ++) {
+                int obsidianChance = ThreadLocalRandom.current().nextInt(0, 6900 + 1);
+                int iceChance = ThreadLocalRandom.current().nextInt(0, 4200 + 1);
 
+                BlockPos pos = new BlockPos(cX, cY, cZ);
+                IBlockState bstate = this.world.getBlockState(pos);
+                Block block = bstate.getBlock();
+                //Below are the checkers for checking if the block is on fire or lava
+                if ((block.getLocalizedName().equals(Blocks.FIRE.getLocalizedName()))&& (killChance < 50)) {
+                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    killChance++;
+                }
+                else if ((block.getLocalizedName().equals(Blocks.FIRE.getLocalizedName())) && (killChance >= 50)) {
+                    world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                    this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, (0.05F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.02F) * 0.5F);
+                    setDead();
+                    return;
+                }
+                //if you are a winner, you will get an obsidian block
+                if ((block.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) && (125 <= obsidianChance && 420 >= obsidianChance )){
+                    world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
+                    MoreCreepsAndWeirdos.proxy.foame(this);
+                    this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.75F, (0.5F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+                    setDead();
+                    return;
+                }
+                else if ((block.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) && ((10 > obsidianChance || 6490 < obsidianChance ))) {
+                    world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
+                    MoreCreepsAndWeirdos.proxy.foame(this);
+                    this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, (2.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+                    setDead();
+                    return;
+                }
+                else if ((block.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) && ((20 > obsidianChance || 6380 < obsidianChance ))) {
+                    world.setBlockState(pos, Blocks.STONE.getDefaultState());
+                    MoreCreepsAndWeirdos.proxy.foame(this);
+                    this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, (3.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+                    setDead();
+                    return;
+                }
+                if ((block.getLocalizedName().equals(Blocks.WATER.getLocalizedName())) && (iceChance == 69)){
+                    world.setBlockState(pos, Blocks.ICE.getDefaultState());
+                    MoreCreepsAndWeirdos.proxy.foame(this);
+                    this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_GLASS_PLACE, SoundCategory.BLOCKS, 1.0F, (10.0F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.2F) * 0.7F);
+                    setDead();
+                    return;
 
+                }
+            }
+        }
+    }
+}
     @Override
     public void onUpdate() {
         super.onUpdate();
         this.xTile = MathHelper.floor(this.posX);
         this.yTile = MathHelper.floor(this.posY);
         this.zTile = MathHelper.floor(this.posZ);
+        prevPosX = posX/1.5;
+        prevPosY = posY/1.5;
+        prevPosZ = posZ/1.5;
+        move(MoverType.SELF, motionX, motionY, motionZ);
 
         MoreCreepsAndWeirdos.proxy.foame(this);
+        Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);
+            Vec3d vec3d = new Vec3d(this.posX + 10, this.posY + 10, this.posZ + 10);
+        ArrayList<Entity> foundEnts = this.findEntitiesOnPath(vec3d1, vec3d);
+        RayTraceResult raytraceresult = this.world.rayTraceBlocks(vec3d1, vec3d, false, true, false);
+        if (foundEnts != null) {
+            extinguish_behaviour(foundEnts);
+        }
 
-        // I am almost certain there is a better way to optimize this ugly block with separate methods
-        if (!onGround) {
-            Vec3d vec3d1 = new Vec3d(this.posX, this.posY, this.posZ);
-            Vec3d vec3d = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
-            Entity entity1 = this.findEntityOnPath(vec3d1, vec3d);
-            if (entity1 != null && entity1 != user){
-                float motionXm = -MathHelper.sin(rotationYaw / 180.0f * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0f * (float)Math.PI);
-                float motionZm = MathHelper.cos(rotationYaw / 180.0f * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0f * (float)Math.PI);
-                float motionYm = -MathHelper.sin(rotationPitch / 180.0f * (float)Math.PI);
-                entity1.moveRelative(motionXm/3.0f,motionYm/3.0f,motionZm/3.0f,1.0f);
-                entity1.extinguish();
+        if (onGround) {
+                if (groundTicks > DECAY) {
+                    setDead();
+                    this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_SNOW_PLACE, SoundCategory.BLOCKS, 0.5F, (0.025F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.02F) * 0.01F);
+                }
+                groundTicks++;
+                motionX /=2.0;
+                motionZ /=2.0;
 
             }
 
-            for (int i = 0; i < 3; i++) {
-                BlockPos blockpos1 = new BlockPos(this.xTile + i, this.yTile + 1, this.zTile);
-                IBlockState tempblockstate = this.world.getBlockState(blockpos1);
-                Block block1 = tempblockstate.getBlock();
-                block1.fillWithRain(this.world, this.getPosition());
 
-                BlockPos blockpos2 = new BlockPos(this.xTile, this.yTile + 1, this.zTile + i);
-                tempblockstate = this.world.getBlockState(blockpos2);
-                Block block2 = tempblockstate.getBlock();
-                block2.fillWithRain(this.world, this.getPosition());
 
-                BlockPos blockpos3 = new BlockPos(this.xTile + i, this.yTile + i, this.zTile + i);
-                tempblockstate = this.world.getBlockState(blockpos3);
-                Block block3 = tempblockstate.getBlock();
-                block3.fillWithRain(this.world, this.getPosition());
+            if (raytraceresult != null)
+        {
+            vec3d = new Vec3d(raytraceresult.hitVec.x, raytraceresult.hitVec.y, raytraceresult.hitVec.z);
+        }
 
-                BlockPos blockpos4 = new BlockPos(this.xTile + i, this.yTile + i, this.zTile);
-                tempblockstate = this.world.getBlockState(blockpos4);
-                Block block4 = tempblockstate.getBlock();
-                block4.fillWithRain(this.world, this.getPosition());
+        ArrayList<Entity> entitiesInPath = this.findEntitiesOnPath(vec3d1, vec3d);
+    if (entitiesInPath != null){
 
-                BlockPos blockpos5 = new BlockPos(this.xTile, this.yTile + i, this.zTile + i);
-                tempblockstate = this.world.getBlockState(blockpos5);
-                Block block5 = tempblockstate.getBlock();
-                block5.fillWithRain(this.world, this.getPosition());
+        for (Entity entityInPath : entitiesInPath) {
+            if (entityInPath != null && entityInPath != user) {
+                raytraceresult = new RayTraceResult(entityInPath);
+            }
 
-                BlockPos blockpos6 = new BlockPos(this.xTile + i, this.yTile + i, this.zTile + i);
-                tempblockstate = this.world.getBlockState(blockpos6);
-                Block block6 = tempblockstate.getBlock();
-                block6.fillWithRain(this.world, this.getPosition());
-
-                if (block1.getLocalizedName().equals(Blocks.FIRE.getLocalizedName())) {
-                    world.setBlockState(blockpos1, Blocks.AIR.getDefaultState());
-                }
-                if (block2.getLocalizedName().equals(Blocks.FIRE.getLocalizedName())) {
-                    world.setBlockState(blockpos2, Blocks.AIR.getDefaultState());
-                }
-                if (block3.getLocalizedName().equals(Blocks.FIRE.getLocalizedName())) {
-                    world.setBlockState(blockpos3, Blocks.AIR.getDefaultState());
-                }
-                if (block4.getLocalizedName().equals(Blocks.FIRE.getLocalizedName())) {
-                    world.setBlockState(blockpos4, Blocks.AIR.getDefaultState());
-                }
-                if (block5.getLocalizedName().equals(Blocks.FIRE.getLocalizedName())) {
-                    world.setBlockState(blockpos5, Blocks.AIR.getDefaultState());
-                }
-                if (block6.getLocalizedName().equals(Blocks.FIRE.getLocalizedName())) {
-                    world.setBlockState(blockpos6, Blocks.AIR.getDefaultState());
-                }
-                if (block1.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) {
-                    world.setBlockState(blockpos1, Blocks.COBBLESTONE.getDefaultState());
-                    MoreCreepsAndWeirdos.proxy.foame(this);
-                    setDead();
-                }
-                if (block2.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) {
-                    world.setBlockState(blockpos2, Blocks.COBBLESTONE.getDefaultState());
-                    MoreCreepsAndWeirdos.proxy.foame(this);
-                    setDead();
-                }
-                if (block3.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) {
-                    world.setBlockState(blockpos3, Blocks.OBSIDIAN.getDefaultState());
-                    MoreCreepsAndWeirdos.proxy.foame(this);
-                    setDead();
-                }
-                if (block4.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) {
-                    world.setBlockState(blockpos4, Blocks.COBBLESTONE.getDefaultState());
-                    MoreCreepsAndWeirdos.proxy.foame(this);
-                    setDead();
-                }
-                if (block5.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) {
-                    world.setBlockState(blockpos5, Blocks.COBBLESTONE.getDefaultState());
-                    MoreCreepsAndWeirdos.proxy.foame(this);
-                    setDead();
-                }
-                if (block6.getLocalizedName().equals(Blocks.LAVA.getLocalizedName())) {
-                    world.setBlockState(blockpos6, Blocks.COBBLESTONE.getDefaultState());
-                    MoreCreepsAndWeirdos.proxy.foame(this);
-                    setDead();
-                }
+            if (raytraceresult != null && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
+                this.onHit(raytraceresult);
             }
 
         }
-    }
+        extinguish_blocks(this.xTile,this.yTile,this.zTile,2);
+}
+
+        }
     @Nullable
-    protected Entity findEntityOnPath(Vec3d start, Vec3d end)
+    protected ArrayList<Entity> findEntitiesOnPath(Vec3d start, Vec3d end)
     {
-        Entity entity = null;
+        ArrayList<Entity> entities = new ArrayList<>();
 
-        double d0 = 0.0D;
 
-        for (Entity entity1 : this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(3.0D), ARROW_TARGETS))
+        for (Entity entity1 : this.world.getEntitiesWithinAABB(EntityLivingBase.class, this.getEntityBoundingBox().expand(this.motionX * 10, this.motionY * 10, this.motionZ * 10).grow(1.0D), ARROW_TARGETS))
         {
             if (!onGround)
             {
-                AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(2.50000001192092896D);
+                AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(0.60000001192092896D);
                 RayTraceResult raytraceresult = axisalignedbb.calculateIntercept(start, end);
 
                 if (raytraceresult != null)
                 {
-                    double d1 = start.squareDistanceTo(raytraceresult.hitVec);
-
-                    if (d1 < d0 || d0 == 0.0D)
-                    {
-                        entity = entity1;
-                        d0 = d1;
-                    }
+                    entities.add(entity1);
                 }
             }
         }
+        return entities;
+    }
+    protected void onHit(RayTraceResult raytraceResultIn) {
+        DamageSource damagesource;
+        Entity entity = raytraceResultIn.entityHit;
+        float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+        float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+        int i = MathHelper.ceil((double)f * this.damage);
 
-        return entity;
+        if (entity != null) {
+            if(entity instanceof EntityLivingBase)
+                entity.addVelocity(this.motionX * 0.3 * 0.6000000238418579D / (double)f1, 0.15, this.motionZ * 0.3 * 0.6000000238418579D / (double)f1);
+            entity.extinguish();
+
+            if (entity.isImmuneToFire()) {
+
+                damagesource = DamageSource.causeThrownDamage(this, this.user);
+                if (entity.attackEntityFrom(damagesource, (float) i)) {
+                    if (entity instanceof EntityLivingBase) {
+                        EntityLivingBase entitylivingbase = (EntityLivingBase) entity;
+                        if (entity.isBurning() || entitylivingbase.isInLava()){
+                            int armorFactor = entitylivingbase.getTotalArmorValue();
+                            this.damage = (armorFactor/2.0) + (this.damage * 2.0);
+                            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_HOSTILE_SPLASH, SoundCategory.BLOCKS, 1.75F, (0.001F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.02F) * 0.002F);
+                        }
+                        if (entitylivingbase.isInWater()){
+                            this.damage = ((entitylivingbase.getMaxHealth()/4.0) + (this.damage * 2.5));
+                            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_BOBBER_SPLASH, SoundCategory.BLOCKS, 1.75F, (0.001F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.02F) * 0.002F);
+                        }
+
+                        else{
+                            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 1.75F, (0.001F + (this.world.rand.nextFloat() - this.world.rand.nextFloat()) * 0.02F) * 0.002F);
+                        }
+
+                        if (this.user != null && entitylivingbase != this.user && entitylivingbase instanceof EntityPlayer && this.user instanceof EntityPlayerMP) {
+                            ((EntityPlayerMP) this.user).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
+                        }
+                    }
+                }
+
+            }
+        }
     }
     @Override
     protected void onImpact(@Nullable RayTraceResult result)

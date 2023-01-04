@@ -19,7 +19,7 @@ public class ItemExtinguisher extends CreepsItem {
     public ItemExtinguisher() {
         super("extinguisher");
         this.setMaxStackSize(1);
-        this.setMaxDamage(100);
+        this.setMaxDamage(250);
     }
 public void generateLift(EntityPlayer player, float gravity, float lift){
 
@@ -28,9 +28,9 @@ public void generateLift(EntityPlayer player, float gravity, float lift){
         armorFactor = 1.0f;
     }
     lift = lift - (lift * (armorFactor/100));
-    float magY = ((player.rotationPitch / 90.0F) * lift) / gravity;
-    float magX = -Math.abs(((lift*lift)/(0.05F+magY))*(MathHelper.sin(((player.cameraPitch) * 3.1415927F)/180.0f)) / (gravity));
-    player.moveRelative(0.0f,magY,magX,1.0f);
+    float magY = (((player.rotationPitch * 0.5F) / 90.0F) * lift) / gravity;
+    float magX = -Math.abs(((lift*lift)/(0.05F+MathHelper.abs(magY)))*(MathHelper.sin(((player.cameraPitch) * 3.1415927F)/180.0f)) / (gravity));
+    player.moveRelative(0.0f,magY*2.0F,magX,1.0f);
 
 
 
