@@ -215,7 +215,7 @@ public class EntityBullet extends Entity
 
     private void blast()
     {
-        // TODO: blast effects, smoke
+    	world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0f, 0f, 0f);
     }
 
     private void blood()
@@ -382,7 +382,9 @@ public class EntityBullet extends Entity
                 }
                 else if (blockHit == Blocks.GLASS)
                 {
-                    world.setBlockToAir(blockHitPos);
+                	//world.setBlockToAir(blockHitPos);
+
+                    world.destroyBlock(blockHitPos, false);
                 }
             }
         }
