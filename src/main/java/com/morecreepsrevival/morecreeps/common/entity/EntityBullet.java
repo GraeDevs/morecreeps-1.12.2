@@ -33,6 +33,7 @@ public class EntityBullet extends Entity
     public double accelerationX;
     public double accelerationY;
     public double accelerationZ;
+    public double speed = 1;
 
     public EntityBullet(World worldIn)
     {
@@ -118,7 +119,7 @@ public class EntityBullet extends Entity
         motionY = -MathHelper.sin(rotationPitch / 180.0f * (float)Math.PI);
     }
 
-    public EntityBullet(World world, EntityLivingBase entityliving, double par3, double par5, double par7)
+    public EntityBullet(World world, EntityLivingBase entityliving, double targetx, double targety, double targetz)
     {
         this(world);
 
@@ -128,26 +129,24 @@ public class EntityBullet extends Entity
 
         if (entityliving instanceof EntitySneakySal)
         {
-            par5 -= 0.344000234d;
+            //par5 -= 0.344000234d;
         }
 
-        setLocationAndAngles(entityliving.posX, entityliving.posY, entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
+        setLocationAndAngles(entityliving.posX, entityliving.posY + entityliving.height / 2.0f, entityliving.posZ, entityliving.rotationYaw, entityliving.rotationPitch);
 
-        motionX = motionY = motionZ = 0.0d;
+        //motionX = motionY = motionZ = 0.0d;
 
-        par3 += rand.nextGaussian() * 0.4d;
+        targetx += rand.nextGaussian() * 0.4d;
 
-        par5 += rand.nextGaussian() * 0.4d;
+        targety += rand.nextGaussian() * 0.4d;
 
-        par7 += rand.nextGaussian() * 0.4d;
+        targetz += rand.nextGaussian() * 0.4d;
 
-        double par9 = MathHelper.sin((float)(par3 * par3 + par5 * par5 + par7 * par7));
+        Vec3d direction = new Vec3d(targetx - posX, targety - posY, targetz - posZ).normalize();
 
-        accelerationX = par3 / par9 * 1.1d;
-
-        accelerationY = par5 / par9 * 1.1d;
-
-        accelerationZ = par7 / par9 * 1.1d;
+        motionX = direction.x * speed;
+        motionY = direction.y * speed;
+        motionZ = direction.z * speed;
     }
 
     @Override
@@ -208,22 +207,26 @@ public class EntityBullet extends Entity
     @Override
     public void setDead()
     {
-        blast();
-
         super.setDead();
     }
 
-    private void blast()
+    private void blast(Vec3d pos)
     {
-    	world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, posX, posY, posZ, 0f, 0f, 0f);
+    	double x = pos.x;
+    	double y = pos.y;
+    	double z = pos.z;
+
+    	world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y, z, 0f, 0f, 0f);
     }
 
-    private void blood()
+    private void blood(Vec3d hitPlace)
     {
-        if (MoreCreepsConfig.blood)
-        {
-            // TODO: blood effects
-        }
+    	double x = hitPlace.x;
+        double y = hitPlace.y;
+        double z = hitPlace.z;
+
+        // TODO: blood effects
+        world.spawnParticle(EnumParticleTypes.REDSTONE, x, y, z, 0f, 0f, 0f);
     }
 
     @Override
@@ -342,11 +345,11 @@ public class EntityBullet extends Entity
 
         motionZ += accelerationZ;
 
-        motionX *= var17;
+        //motionX *= var17;
 
-        motionY *= var17;
+        //motionY *= var17;
 
-        motionZ *= var17;
+        //motionZ *= var17;
 
         setPosition(posX, posY, posZ);
 
@@ -355,16 +358,18 @@ public class EntityBullet extends Entity
 
     private void onHit(RayTraceResult rtr)
     {
-        if (rtr.entityHit != null && rtr.entityHit == getShootingEntity())
+    	Entity entityHit = rtr.entityHit;
+    	
+        if (entityHit != null && entityHit == getShootingEntity())
         {
             return;
         }
 
-        if (rtr.entityHit != null && rtr.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getShootingEntity()), damage))
+        if (entityHit != null && entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getShootingEntity()), damage))
         {
-            if (MoreCreepsConfig.blood && !(rtr.entityHit instanceof EntityRobotTodd) && !(rtr.entityHit instanceof EntityRobotTed))
+            if (MoreCreepsConfig.blood && !(entityHit instanceof EntityCreepBase && !((EntityCreepBase)entityHit).canBleed()))
             {
-                blood();
+                blood(rtr.hitVec);
             }
         }
 
@@ -382,9 +387,13 @@ public class EntityBullet extends Entity
                 }
                 else if (blockHit == Blocks.GLASS)
                 {
-                	//world.setBlockToAir(blockHitPos);
+                	blast(rtr.hitVec);
 
                     world.destroyBlock(blockHitPos, false);
+                }
+                else
+                {
+                	blast(rtr.hitVec);
                 }
             }
         }
