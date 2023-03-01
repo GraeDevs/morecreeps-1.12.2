@@ -78,6 +78,12 @@ public class EntityRobotTodd extends EntityCreepBase implements IMob
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityRobotTed.class, true));
     }
+    
+    @Override
+    public boolean canBleed()
+    {
+    	return false;
+    }
 
     @Override
     protected SoundEvent getAmbientSound()

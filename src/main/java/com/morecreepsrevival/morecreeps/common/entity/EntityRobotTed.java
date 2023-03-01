@@ -76,6 +76,12 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
     {
         return 2.0f;
     }
+    
+    @Override
+    public boolean canBleed()
+    {
+    	return false;
+    }
 
     @Override
     public void onLivingUpdate() {
