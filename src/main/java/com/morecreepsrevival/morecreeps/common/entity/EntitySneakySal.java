@@ -155,7 +155,7 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
 
         playSound(CreepsSoundHandler.bulletSound, getSoundVolume(), getSoundPitch());
 
-        EntityBullet bullet = new EntityBullet(world, this, target.posX, target.getEntityBoundingBox().minY + target.height/2f, target.posZ);
+        EntityBullet bullet = new EntityBullet(world, this, target.posX + target.motionX, target.getEntityBoundingBox().minY + target.height/2f, target.posZ + target.motionZ);
 
         if (!world.isRemote)
         {
