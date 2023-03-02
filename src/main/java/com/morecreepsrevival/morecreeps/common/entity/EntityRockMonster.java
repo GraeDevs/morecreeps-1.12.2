@@ -5,6 +5,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -22,9 +25,9 @@ public class EntityRockMonster extends EntityCreepBase {
         setCreepTypeName("Rock Monster");
 
         setSize(2f, 2f);
-        getEntityBoundingBox().offset(0d, 0d, 2d); // were fixing hitbox position
+        getEntityBoundingBox().offset(0d, 0d, 2d);
 
-        baseSpeed = 0.55d;
+        baseSpeed = 0.45d;
         baseHealth = 60f;
 
         experienceValue = 10;
@@ -61,7 +64,7 @@ public class EntityRockMonster extends EntityCreepBase {
 
         tasks.addTask(3, new AIAttackEntity());
 
-        tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.5d));
+        tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.45d));
 
         tasks.addTask(5, new EntityAIWanderAvoidWater(this, 1.0d));
 
@@ -108,24 +111,53 @@ public class EntityRockMonster extends EntityCreepBase {
                     entitylivingbase.motionX = motionX * 3D;
                     entitylivingbase.motionY = rand.nextFloat() * 2.533F;
                     entitylivingbase.motionZ = motionZ * 3D;
-                    this.rockM.attackEntityAsMob(entitylivingbase);// or entitylivingbase.attackEntityFrom blablabla...
+                    this.rockM.attackEntityAsMob(entitylivingbase);
                 }
 
-                this.rockM.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.75D);
+                this.rockM.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.45D);
             }
             else if (d0 < 256.0D)
             {
-                // ATTACK ENTITY JUST CALLED HERE :D
                 this.rockM.getLookHelper().setLookPositionWithEntity(this.rockM.getAttackTarget(), 30.0F, 30.0F);
-                this.rockM.getMoveHelper().setMoveTo(this.rockM.getAttackTarget().posX, this.rockM.getAttackTarget().posY, this.rockM.getAttackTarget().posZ, 0.75D);
+                this.rockM.getMoveHelper().setMoveTo(this.rockM.getAttackTarget().posX, this.rockM.getAttackTarget().posY, this.rockM.getAttackTarget().posZ, 0.45D);
 
             }
         }
     }
 
     @Override
+    protected void dropItemsOnDeath()
+    {
+        if (rand.nextInt(10) == 0)
+        {
+            dropItem(Item.getItemFromBlock(Blocks.SAND), rand.nextInt(3) + 1);
+        }
+
+        if (rand.nextInt(10) == 0)
+        {
+            dropItem(Item.getItemFromBlock(Blocks.GRAVEL), rand.nextInt(3) + 1);
+        }
+        if (rand.nextInt(20) == 0)
+        {
+            dropItem(Items.IRON_INGOT, rand.nextInt(1) + 1);
+        }
+    }
+
+    @Override
     protected SoundEvent getAmbientSound()
     {
-        return CreepsSoundHandler.tedInsultSound;
+        return CreepsSoundHandler.rockMonster;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource)
+    {
+        return CreepsSoundHandler.rockMonsterHurt;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound()
+    {
+        return CreepsSoundHandler.rockMonsterDeath;
     }
 }

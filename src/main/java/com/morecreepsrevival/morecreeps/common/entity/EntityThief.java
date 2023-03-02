@@ -223,9 +223,9 @@ public class EntityThief extends EntityCreepBase implements IMob
                         dataManager.set(ITEM, copy);
 
                         dataManager.setDirty(ITEM);
-                    }
 
-                    itemStack.shrink(stolenAmount);
+                        itemStack.shrink(stolenAmount);
+                    }
 
                     playSound(CreepsSoundHandler.thiefStealSound, getSoundVolume(), getSoundPitch());
 

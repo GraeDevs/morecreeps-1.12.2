@@ -1,6 +1,7 @@
 package com.morecreepsrevival.morecreeps.common.sounds;
 
 import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
+import net.minecraft.client.audio.Sound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -573,6 +574,12 @@ public class CreepsSoundHandler
 
     public static final SoundEvent ponyDrink = createSound("ponydrink");
 
+    public static final SoundEvent rockMonster = createSound("rockmonsterambient");
+
+    public static final SoundEvent rockMonsterDeath = createSound("rockmonsterdeath");
+
+    public static final SoundEvent rockMonsterHurt = createSound("rockmonsterhurt");
+
 
     private static SoundEvent createSound(String soundName)
     {
@@ -863,7 +870,10 @@ public class CreepsSoundHandler
                 invisibleManAngry,
                 invisibleManDeath,
                 invisibleManForget,
-                invisibleManHurt
+                invisibleManHurt,
+                rockMonsterHurt,
+                rockMonster,
+                rockMonsterDeath
         );
     }
 }
