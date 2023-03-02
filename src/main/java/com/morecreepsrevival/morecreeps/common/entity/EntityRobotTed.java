@@ -8,11 +8,15 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 public class EntityRobotTed extends EntityCreepBase implements IMob
 {
+
+    public int floattimer;
+
     public EntityRobotTed(World worldIn)
     {
         super(worldIn);
@@ -28,6 +32,8 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
         baseHealth = (float)rand.nextInt(20) + 25.0f;
 
         baseSpeed = 0.25d;
+
+        floattimer = 0;
 
         updateAttributes();
     }
@@ -80,6 +86,11 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
+    }
+
+    @Override
+    public boolean canBleed() {
+        return false;
     }
 
     @Override
