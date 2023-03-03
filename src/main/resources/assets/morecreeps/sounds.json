@@ -5925,5 +5925,23 @@
 				"stream": false
 			}
 		]
+	},
+	"vhshurt": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:vhshurt",
+				"stream": false
+			}
+		]
+	},
+	"vhsdeath": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:vhsdeath",
+				"stream": false
+			}
+		]
 	}
 }

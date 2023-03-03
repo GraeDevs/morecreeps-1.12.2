@@ -580,6 +580,10 @@ public class CreepsSoundHandler
 
     public static final SoundEvent rockMonsterHurt = createSound("rockmonsterhurt");
 
+    public static final SoundEvent vhsHurt = createSound("vhshurt");
+
+    public static final SoundEvent vhsDeath = createSound("vhsdeath");
+
 
     private static SoundEvent createSound(String soundName)
     {
@@ -873,7 +877,9 @@ public class CreepsSoundHandler
                 invisibleManHurt,
                 rockMonsterHurt,
                 rockMonster,
-                rockMonsterDeath
+                rockMonsterDeath,
+                vhsHurt,
+                vhsDeath
         );
     }
 }

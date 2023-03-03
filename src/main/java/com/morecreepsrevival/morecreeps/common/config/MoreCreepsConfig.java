@@ -133,6 +133,8 @@ public class MoreCreepsConfig
 
     public static int ponyGirlSpawnAmt = 0;
 
+    public static int vhsSpawnAmt = 0;
+
     public static String hideUpdateGuiVersion = "";
 
     public static double globalSpawnRate = 1.0f;
@@ -190,6 +192,8 @@ public class MoreCreepsConfig
             guineaPigSpawnAmt = config.get(spawnNbr, "Guinea Pig", 8).getInt();
 
             babyMummySpawnAmt = config.get(spawnNbr, "Baby Mummy", 8).getInt();
+
+            vhsSpawnAmt = config.get(spawnNbr, "Walking VHS", 8).getInt();
 
             blackSoulSpawnAmt = config.get(spawnNbr, "Black Soul", 5).getInt();
 
@@ -289,6 +293,11 @@ public class MoreCreepsConfig
         if (unlimitedSpawn)
         {
             return;
+        }
+
+        if (vhsSpawnAmt < 0 || vhsSpawnAmt > 12)
+        {
+            vhsSpawnAmt = 5;
         }
 
         if (armyGuySpawnAmt < 0 || armyGuySpawnAmt > 12)
