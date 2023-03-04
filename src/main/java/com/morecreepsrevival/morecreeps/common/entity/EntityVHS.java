@@ -1,6 +1,7 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.NodeProcessor;
@@ -15,9 +16,12 @@ public class EntityVHS extends EntityCreepBase {
         super(worldIn);
 
         setCreepTypeName("Walking VHS");
+        creatureType = EnumCreatureType.MONSTER;
 
         baseSpeed = 0.35d;
         baseHealth = 15f;
+
+        setSize(1.55f, 1.25f);
 
         experienceValue = 10;
 
@@ -38,13 +42,13 @@ public class EntityVHS extends EntityCreepBase {
 
         tasks.addTask(2, new EntityAIBreakDoor(this));
 
-        tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.45d));
+        tasks.addTask(3, new EntityAIMoveTowardsRestriction(this, 0.8d));
 
         tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0d));
 
-        tasks.addTask(5, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0f));
-
         tasks.addTask(5, new EntityAILookIdle(this));
+
+        tasks.addTask(6, new EntityAIAttackMelee(this, 0.75d, false));
 
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
@@ -55,6 +59,12 @@ public class EntityVHS extends EntityCreepBase {
     protected void dropItemsOnDeath()
     {
 
+    }
+
+    @Override
+    protected void updateTexture()
+    {
+        setTexture("textures/entity/vhs.png");
     }
 
     @Override

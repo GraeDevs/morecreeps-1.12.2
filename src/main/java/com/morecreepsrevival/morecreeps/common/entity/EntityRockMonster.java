@@ -3,6 +3,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,12 +24,15 @@ public class EntityRockMonster extends EntityCreepBase {
         super(worldIn);
 
         setCreepTypeName("Rock Monster");
+        creatureType = EnumCreatureType.MONSTER;
 
         setSize(2f, 2f);
-        getEntityBoundingBox().offset(0d, 0d, 2d);
+        getEntityBoundingBox().offset(0d, 0d, 0d);
 
-        baseSpeed = 0.45d;
+        baseSpeed = 0.35d;
         baseHealth = 60f;
+
+        baseAttackDamage = 4f;
 
         experienceValue = 10;
 
@@ -48,8 +52,7 @@ public class EntityRockMonster extends EntityCreepBase {
     }
 
     @Override
-    protected void initEntityAI()
-    {
+    protected void initEntityAI() {
         clearAITasks();
 
         NodeProcessor nodeProcessor = getNavigator().getNodeProcessor();
@@ -75,15 +78,6 @@ public class EntityRockMonster extends EntityCreepBase {
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-    }
-
-    protected void attackEntity(Entity entity, float f)
-    {
-        double d = entity.posX - posX;
-        double d1 = entity.posZ - posZ;
-        float f1 = MathHelper.sqrt(d * d + d1 * d1);
-        motionX = (d / (double)f1) * 0.5D * 0.30000000192092896D + motionX * 0.38000000098023223D;
-        motionZ = (d1 / (double)f1) * 0.5D * 0.17000000192092896D + motionZ * 0.38000000098023223D;
     }
 
     public class AIAttackEntity extends EntityAIBase {
@@ -114,12 +108,12 @@ public class EntityRockMonster extends EntityCreepBase {
                     this.rockM.attackEntityAsMob(entitylivingbase);
                 }
 
-                this.rockM.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.45D);
+                this.rockM.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.65D);
             }
             else if (d0 < 256.0D)
             {
                 this.rockM.getLookHelper().setLookPositionWithEntity(this.rockM.getAttackTarget(), 30.0F, 30.0F);
-                this.rockM.getMoveHelper().setMoveTo(this.rockM.getAttackTarget().posX, this.rockM.getAttackTarget().posY, this.rockM.getAttackTarget().posZ, 0.45D);
+                this.rockM.getMoveHelper().setMoveTo(this.rockM.getAttackTarget().posX, this.rockM.getAttackTarget().posY, this.rockM.getAttackTarget().posZ, 0.65D);
 
             }
         }

@@ -4,6 +4,9 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
+
+import javax.annotation.Nonnull;
 
 public class ModelVHS extends ModelBase {
 
@@ -15,18 +18,10 @@ public class ModelVHS extends ModelBase {
     public boolean heldItemLeft;
     public boolean heldItemRight;
     public boolean isSneak;
+    public ModelVHS() {
+        textureWidth = 96;
+        textureHeight = 96;
 
-    public ModelVHS()
-    {
-        this(0.0F);
-    }
-
-    public ModelVHS(float f)
-    {
-        this(f, 0.0F);
-    }
-
-    public ModelVHS(float f, float f1) {
         heldItemLeft = false;
         heldItemRight = false;
         isSneak = false;
@@ -54,6 +49,7 @@ public class ModelVHS extends ModelBase {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         body.render(f5);
         rightLeg.render(f5);
         leftLeg.render(f5);
@@ -61,9 +57,23 @@ public class ModelVHS extends ModelBase {
         leftArm.render(f5);
     }
 
-    public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
+    @Override
+    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) {
+        leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 1.4f * limbSwingAmount * 0.5f;
+        rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount * 0.5f;
+        rightLeg.rotateAngleZ = 0.0f;
+        leftLeg.rotateAngleZ = 0.0f;
+
+        rightArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662f + (float)Math.PI) * 1.4f * limbSwingAmount * 0.5f;
+        leftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662f) * 1.4f * limbSwingAmount * 0.5f;
+        rightArm.rotateAngleZ = 0.0f;
+        leftArm.rotateAngleZ = 0.0f;
+
+        rightArm.rotateAngleY = 0.0f;
+        leftArm.rotateAngleY = 0.0f;
+
+        if (swingProgress > -9990f) {
+            float f6 = swingProgress;
+        }
     }
 }

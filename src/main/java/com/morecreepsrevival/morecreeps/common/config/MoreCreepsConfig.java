@@ -295,9 +295,9 @@ public class MoreCreepsConfig
             return;
         }
 
-        if (vhsSpawnAmt < 0 || vhsSpawnAmt > 12)
+        if (vhsSpawnAmt < 0 || vhsSpawnAmt > 4)
         {
-            vhsSpawnAmt = 5;
+            vhsSpawnAmt = 2;
         }
 
         if (armyGuySpawnAmt < 0 || armyGuySpawnAmt > 12)
@@ -455,9 +455,9 @@ public class MoreCreepsConfig
             robotToddSpawnAmt = 7;
         }
 
-        if (rockMonsterSpawnAmt < 0 || rockMonsterSpawnAmt > 12)
+        if (rockMonsterSpawnAmt < 0 || rockMonsterSpawnAmt > 5)
         {
-            rockMonsterSpawnAmt = 7;
+            rockMonsterSpawnAmt = 1;
         }
 
         if (rocketGiraffeSpawnAmt < 0 || rocketGiraffeSpawnAmt > 12)
