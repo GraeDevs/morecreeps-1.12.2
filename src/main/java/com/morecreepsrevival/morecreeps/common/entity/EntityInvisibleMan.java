@@ -30,12 +30,15 @@ import java.util.List;
 import java.util.UUID;
 
 public class EntityInvisibleMan extends EntityCreepBase {
+    private static final DataParameter<Boolean> anger = EntityDataManager.<Boolean>createKey(EntityInvisibleMan.class, DataSerializers.BOOLEAN);
 
     private int angerLevel;
+    private boolean hasAngryTexture = false;
     private UUID angerTargetUUID;
 
     public EntityInvisibleMan(World world) {
         super(world);
+
         setCreepName("Invisible Man");
 
         creatureType = EnumCreatureType.MONSTER;
@@ -43,6 +46,10 @@ public class EntityInvisibleMan extends EntityCreepBase {
         baseHealth = (float)rand.nextInt(40) + 40.0f;
 
         baseSpeed = 0.3d;
+
+        setSize(0.8f, 1.8f);
+
+        dataManager.set(anger, false);
 
         this.angerLevel = 0;
 
@@ -59,7 +66,7 @@ public class EntityInvisibleMan extends EntityCreepBase {
     {
         super.entityInit();
 
-
+        dataManager.register(anger, false);
     }
 
     @Override
@@ -88,7 +95,7 @@ public class EntityInvisibleMan extends EntityCreepBase {
         targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 
     }
-
+    @Override
     public void setRevengeTarget(@Nullable EntityLivingBase livingBase)
     {
         super.setRevengeTarget(livingBase);
@@ -99,7 +106,7 @@ public class EntityInvisibleMan extends EntityCreepBase {
         }
     }
 
-
+    @Override
     public boolean attackEntityFrom(DamageSource damagesource, float i)
     {
         Entity entity = damagesource.getTrueSource();
@@ -130,27 +137,51 @@ public class EntityInvisibleMan extends EntityCreepBase {
     private void becomeAngryAt(Entity entity) {
         this.setAttackTarget((EntityLivingBase)entity);
         angerLevel += 40 + rand.nextInt(40);
-        this.setTexture("textures/entity/invisiblemanmad.png");
+        dataManager.set(anger, true);
     }
-
+    @Override
     public void onUpdate() {
         super.onUpdate();
-        if(angerLevel == 0) {
-            //this.setTexture("textures/entity/invisibleman.png");
+
+        boolean serverSaysWeAreAngry = dataManager.get(anger);
+
+        if(hasAngryTexture && !serverSaysWeAreAngry) {
+            this.setTexture("textures/entity/invisibleman.png");
+            hasAngryTexture = false;
+        }
+
+        if(!hasAngryTexture && serverSaysWeAreAngry) {
+            this.setTexture("textures/entity/invisiblemanmad.png");
+            hasAngryTexture = true;
         }
     }
-
+    @Override
     public void onLivingUpdate()
     {
         super.onLivingUpdate();
+
+
+
         if(isAngry()) {
             --angerLevel;
+
+            //If just got calmed down, tell the client he isn't angry anymore.
+            if(!isAngry()) dataManager.set(anger, false);
+        }
+        else{
+            this.setAttackTarget(null);
         }
     }
 
     public boolean isAngry()
     {
         return angerLevel > 0;
+    }
+
+    @Override
+    public int getRevengeTimer()
+    {
+        return angerLevel;
     }
 
     @Override
