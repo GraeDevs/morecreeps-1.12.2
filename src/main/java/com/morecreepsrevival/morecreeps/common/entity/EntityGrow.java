@@ -447,13 +447,13 @@ public class EntityGrow extends EntityThrowable
                         }
                     }
                     // TODO: EntityRockMonster
-                    else if (rtr.entityHit instanceof EntityBabyMummy)
+                    else if (rtr.entityHit instanceof EntityRockMonster)
                     {
-                        EntityBabyMummy babyMummy = (EntityBabyMummy)rtr.entityHit;
+                        EntityRockMonster rockMonster = (EntityRockMonster)rtr.entityHit;
 
-                        if (babyMummy.getModelSize() < 4.0f + growMax)
+                        if (rockMonster.getModelSize() < 4.0f + growMax)
                         {
-                            babyMummy.growModelSize(0.2f + growBonus);
+                            rockMonster.growModelSize(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityBlackSoul)
@@ -623,6 +623,15 @@ public class EntityGrow extends EntityThrowable
                         if (thief.getModelSize() < 4.0f + growMax)
                         {
                             thief.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityVHS)
+                    {
+                        EntityVHS vhs = (EntityVHS)rtr.entityHit;
+
+                        if (vhs.getModelSize() < 4.0f + growMax)
+                        {
+                            vhs.growModelSize(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityZebra)

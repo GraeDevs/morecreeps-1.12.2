@@ -5943,5 +5943,14 @@
 				"stream": false
 			}
 		]
+	},
+	"vhshammer": {
+		"category": "player",
+		"sounds": [
+			{
+				"name": "morecreeps:vhshammer",
+				"stream": false
+			}
+		]
 	}
 }

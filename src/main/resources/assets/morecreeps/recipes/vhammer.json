@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " x ",
+    " sx",
+    "s  "
+  ],
+  "key": {
+    "x": {
+      "item": "morecreeps:vhstape"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "morecreeps:vhammer",
+    "count": 1
+  }
+}

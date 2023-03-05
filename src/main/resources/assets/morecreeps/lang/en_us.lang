@@ -48,6 +48,8 @@ item.morecreeps.mobile_phone.name=Mobile Phone
 item.morecreeps.lucky_dress.name=Lucky Dress
 item.morecreeps.medicine.name=Medicine
 item.morecreeps.pee_bucket.name=Pee Bucket
+item.morecreeps.vhstape.name=VHS Tape
+item.morecreeps.vhammer.name=VHS Hammer
 
 # Entities
 entity.morecreeps.guineapig.name=Guinea Pig

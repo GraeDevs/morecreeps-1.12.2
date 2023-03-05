@@ -141,6 +141,10 @@ public class CreepsItemHandler
 
     public static final Item peeBucket = new ItemPeeBuck();
 
+    public static final Item vhsTape = new ItemVHSTape();
+
+    public static final Item vHammer = new ItemVhammer();
+
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
@@ -199,7 +203,9 @@ public class CreepsItemHandler
                 ram16k,
                 mobilePhone,
                 medicine,
-                luckyDress
+                luckyDress,
+                vhsTape,
+                vHammer
         );
     }
 
