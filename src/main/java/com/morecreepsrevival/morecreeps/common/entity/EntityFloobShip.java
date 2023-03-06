@@ -173,10 +173,7 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
     }
 
     @Override
-    protected SoundEvent getAmbientSound()
-    {
-        return CreepsSoundHandler.floobShipSound;
-    }
+    protected SoundEvent getAmbientSound() { return CreepsSoundHandler.floobShipSound; }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource)
@@ -193,6 +190,12 @@ public class EntityFloobShip extends EntityCreepBase implements IMob
         }
 
         return null;
+    }
+
+    @Override
+    protected float getSoundVolume()
+    {
+        return 0.5f;
     }
 
     @Override

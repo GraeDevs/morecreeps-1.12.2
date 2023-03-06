@@ -271,7 +271,9 @@ public class EntityBum extends EntityCreepBase implements IMob
 
                         setTimeToPee(rand.nextInt(1900) + 1500);
 
-                        dropItem(CreepsItemHandler.peeBucket, 1);
+                        if(!world.isRemote) {
+                            dropItem(CreepsItemHandler.peeBucket, 1);
+                        }
 
                         itemStack.shrink(1);
                     }

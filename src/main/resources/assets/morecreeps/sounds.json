@@ -5944,6 +5944,32 @@
 			}
 		]
 	},
+	"sambient": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:s1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:s2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:s3",
+				"stream": false
+			}
+		]
+	},
+	"shurt": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:shurt",
+				"stream": false
+			}
+		]
+	},
 	"vhshammer": {
 		"category": "player",
 		"sounds": [
