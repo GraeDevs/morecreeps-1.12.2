@@ -223,7 +223,7 @@ public class ModelRobotTed extends ModelBase
         double zVariation = (sugarRandom.nextInt(200) - 100) * 0.005;
 
         //float yaw = entity.rotationYaw + 1.5707963268f * (rightLeg ? 1f : -1f);
-        //double legAngleX = MathHelper.sin(yaw) * 0.75;
+        //double legAngleX = MathHelper.sin(yaw) * 0.75;a
         //double legAngleZ = MathHelper.cos(yaw) * 0.75;
 
 
