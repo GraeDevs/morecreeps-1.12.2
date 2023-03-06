@@ -136,7 +136,7 @@ public class EntityInvisibleMan extends EntityCreepBase {
 
     private void becomeAngryAt(Entity entity) {
         this.setAttackTarget((EntityLivingBase)entity);
-        angerLevel += 120 + rand.nextInt(120);
+        angerLevel += 40 + rand.nextInt(40);
         dataManager.set(anger, true);
     }
     @Override
@@ -209,4 +209,3 @@ public class EntityInvisibleMan extends EntityCreepBase {
         dropItem(Items.APPLE, 1);
     }
 }
-
