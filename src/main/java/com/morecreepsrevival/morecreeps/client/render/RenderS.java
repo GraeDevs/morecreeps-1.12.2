@@ -10,6 +10,6 @@ public class RenderS<T extends EntityS> extends RenderCreep<T>
 {
     public RenderS(RenderManager renderManager)
     {
-        super(renderManager, new ModelS(), 0.5f);
+        super(renderManager, new ModelS(), 0.8f);
     }
 }

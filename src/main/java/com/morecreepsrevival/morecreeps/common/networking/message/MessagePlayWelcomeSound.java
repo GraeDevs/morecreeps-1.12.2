@@ -36,7 +36,7 @@ public class MessagePlayWelcomeSound implements IMessage
             minecraft.addScheduledTask(() -> {
                 if (MoreCreepsConfig.playWelcomeSound)
                 {
-                    minecraft.player.playSound(CreepsSoundHandler.welcomeSound, 1.0f, 1.0f);
+                    minecraft.player.playSound(CreepsSoundHandler.welcomeSound, 0.5f, 1.0f);
                 }
             });
 

@@ -100,6 +100,10 @@ public class EntityS extends EntityCreepBase implements IMob {
         {
             dropItem(CreepsItemHandler.money, rand.nextInt(10) + 1);
         }
+        if (rand.nextInt(10) == 0)
+        {
+            dropItem(Items.GOLD_INGOT, rand.nextInt(3) + 1);
+        }
 
     }
 
@@ -113,6 +117,12 @@ public class EntityS extends EntityCreepBase implements IMob {
     protected SoundEvent getHurtSound(DamageSource damageSource)
     {
         return CreepsSoundHandler.sHurt;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound()
+    {
+        return CreepsSoundHandler.sDeath;
     }
 
 }
