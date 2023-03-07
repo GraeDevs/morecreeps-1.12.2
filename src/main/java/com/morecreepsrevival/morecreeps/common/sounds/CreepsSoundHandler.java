@@ -598,6 +598,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent desertLizardDeath = createSound("desertlizarddeath");
 
+    public static final SoundEvent desertLizardFireball = createSound("desertlizardfireball");
+
 
     private static SoundEvent createSound(String soundName)
     {

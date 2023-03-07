@@ -1,9 +1,19 @@
 package com.morecreepsrevival.morecreeps.client.models;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.particle.ParticleBreaking;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.client.particle.Particle;
+
+import java.util.Random;
 
 public class ModelRobotTed extends ModelBase
 {
@@ -24,6 +34,15 @@ public class ModelRobotTed extends ModelBase
     public boolean heldItemLeft;
     public boolean heldItemRight;
     public boolean isSneak;
+
+    long bouncePeriod = 100000, sugarPeriod = 25;
+    long lastMS;
+    float bounceDelta = 0f, sugarDelta = 0f;
+    float lastOffsetModification = 0f;
+
+    scala.util.Random sugarRandom = new scala.util.Random();
+
+    ModelRenderer[] models;
 
     public ModelRobotTed()
     {
@@ -86,11 +105,61 @@ public class ModelRobotTed extends ModelBase
         visor = new ModelRenderer(this, 9, 20);
         visor.addBox(-3F, -5F, -3.8F, 6, 2, 1, f2);
         visor.setRotationPoint(0.0F, 7F, 0.0F);
+
+        models = new ModelRenderer[]
+                {
+                        tedhead,
+                        body,
+                        body2,
+                        legL,
+                        legR,
+                        arm1L,
+                        arm1R,
+                        arm2L,
+                        arm2R,
+                        hornL,
+                        hornR,
+                        eyeL,
+                        eyeR,
+                        visor
+                };
+
+        lastMS = System.currentTimeMillis();
     }
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
+        float bounceAmount = 0.1f;
+
+        long currentMS = System.currentTimeMillis();
+
+        long difference = currentMS - lastMS;
+
+        bounceDelta += difference / (double) bouncePeriod;
+        sugarDelta += difference / (double) sugarPeriod;
+
+        lastMS = currentMS;
+
+        bounceDelta -= (int) bounceDelta;
+        boolean shouldNotSugarSpawn = sugarDelta < 1f;
+        sugarDelta -= (int) sugarDelta;
+
+        float sindelta = MathHelper.sin(bounceDelta * 180f);
+
+        float sProgress = sindelta * bounceAmount;
+
+        setBounce(sProgress);
+
+        boolean wichLeg = true;
+
+        for(int i = 0; i < 6; ++i)
+        {
+            spawnSugar(shouldNotSugarSpawn, entity, sProgress, f3, wichLeg);
+
+            wichLeg = !wichLeg;
+        }
+
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         tedhead.render(f5);
         body.render(f5);
@@ -127,5 +196,47 @@ public class ModelRobotTed extends ModelBase
         arm1L.rotateAngleX = MathHelper.cos(f * 0.6662F) * 3F * f1 * 0.5F - 0.5F;
         arm2R.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 3F * f1 * 0.5F - 0.95F;
         arm2L.rotateAngleX = MathHelper.cos(f * 0.6662F) * 3F * f1 * 0.5F - 0.95F;
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void setBounce(float bounce)
+    {
+        if(Minecraft.getMinecraft().isGamePaused()) return;
+
+        for (ModelRenderer current : models) {
+            current.offsetY += bounce - lastOffsetModification;
+        }
+
+        lastOffsetModification = bounce;
+    }
+    @SideOnly(Side.CLIENT)
+    private void spawnSugar(boolean shouldNot, Entity entity, float ychange, float entityYaw, boolean rightLeg)
+    {
+        if(Minecraft.getMinecraft().isGamePaused()) return;
+
+        if(shouldNot) return;
+
+        double xMov = (sugarRandom.nextInt(8) - 4 + 1) * 0.06;
+        double zMov = (sugarRandom.nextInt(8) - 4 + 1) * 0.06;
+        double xVariation = (sugarRandom.nextInt(200) - 100) * 0.005;
+        double zVariation = (sugarRandom.nextInt(200) - 100) * 0.005;
+
+        //float yaw = entity.rotationYaw + 1.5707963268f * (rightLeg ? 1f : -1f);
+        //double legAngleX = MathHelper.sin(yaw) * 0.75;
+        //double legAngleZ = MathHelper.cos(yaw) * 0.75;
+
+
+
+        double legMiddleX = entity.posX + xVariation+ (legR.offsetX + (legR.offsetX - legL.offsetX) * 0.5d);
+        double legMiddleZ = entity.posZ + zVariation + (legR.offsetZ + (legR.offsetZ - legL.offsetZ) * 0.5d);
+        double legY = entity.posY - ychange;
+
+        ParticleBreaking.Factory maker = new ParticleBreaking.Factory();
+
+        Particle sugarParticle = maker.createParticle(-1, entity.world, legMiddleX, legY, legMiddleZ, xMov, 0.5f, zMov, Item.getIdFromItem(Items.SUGAR));
+
+        //sugarParticle.multipleParticleScaleBy(1f);
+
+        Minecraft.getMinecraft().effectRenderer.addEffect(sugarParticle);
     }
 }

@@ -149,9 +149,4 @@ public class EntityRockMonster extends EntityCreepBase {
         return CreepsSoundHandler.rockMonsterHurt;
     }
 
-    @Override
-    protected SoundEvent getDeathSound()
-    {
-        return CreepsSoundHandler.rockMonsterDeath;
-    }
 }
