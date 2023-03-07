@@ -112,7 +112,7 @@ public class EntityDesertLizard extends EntityCreepBase {
             EntityLivingBase entityLivingBase = world.getClosestPlayerToEntity(parentEntity, 30D);
             double d = 64d;
 
-            if (entityLivingBase != null && canEntityBeSeen(entityLivingBase) && (entityLivingBase instanceof EntityPlayer)) {
+            if (entityLivingBase != null && canEntityBeSeen(entityLivingBase)) {
 
                 double d1 = entityLivingBase.getDistanceSq(parentEntity);
                 if (d1 < d * d && d1 > 10D) {
