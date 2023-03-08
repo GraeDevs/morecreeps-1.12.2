@@ -1,11 +1,13 @@
 package com.morecreepsrevival.morecreeps.common.world;
 
 import com.morecreepsrevival.morecreeps.common.entity.*;
+import com.morecreepsrevival.morecreeps.common.helpers.CreepsUtil;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.BlockStairs;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.item.EntityItem;
@@ -313,22 +315,22 @@ public class JailManager
 
             if (rand.nextInt(1) == 0)
             {
-                world.setBlockState(new BlockPos(jailX + 12, jailY + 2, jailZ - i * 7 - 5), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 12, jailY + 2, jailZ - i * 7 - 5));
             }
 
             if (rand.nextInt(1) == 0)
             {
-                world.setBlockState(new BlockPos(jailX + 2, jailY + 2, jailZ - i * 7 - 5), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 2, jailY + 2, jailZ - i * 7 - 5));
             }
 
             if (rand.nextInt(1) == 0)
             {
-                world.setBlockState(new BlockPos(jailX + 12, jailY + 2, jailZ + i * 7 + 19), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 12, jailY + 2, jailZ + i * 7 + 19));
             }
 
             if (rand.nextInt(1) == 0)
             {
-                world.setBlockState(new BlockPos(jailX + 2, jailY + 2, jailZ + i * 7 + 19), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 2, jailY + 2, jailZ + i * 7 + 19));
             }
         }
 
@@ -336,22 +338,22 @@ public class JailManager
         {
             if (rand.nextInt(2) == 0)
             {
-                world.setBlockState(new BlockPos(jailX + 6, jailY + 2, jailZ - i * 4 - 2), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 6, jailY + 2, jailZ - i * 4 - 2));
             }
 
             if (rand.nextInt(2) == 0)
             {
-                world.setBlockState(new BlockPos(jailX + 8, jailY + 2, jailZ - i * 4 - 2), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 8, jailY + 2, jailZ - i * 4 - 2));
             }
 
             if (rand.nextInt(2) == 0)
             {
-                world.setBlockState(new BlockPos(jailX + 6, jailY + 2, jailZ + i * 4 + 18), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 6, jailY + 2, jailZ + i * 4 + 18));
             }
 
             if (rand.nextInt(2) == 0)
             {
-                world.setBlockState(new BlockPos(jailX + 8, jailY + 2, jailZ + i * 4 + 18), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 8, jailY + 2, jailZ + i * 4 + 18));
             }
         }
 
@@ -507,7 +509,7 @@ public class JailManager
 
         chest3.setInventorySlotContents(rand.nextInt(5), new ItemStack(Items.APPLE, 1));
 
-        world.setBlockState(new BlockPos(jailX + 6, jailY + 2, jailZ + 9), Blocks.TORCH.getDefaultState());
+        CreepsUtil.TryPlaceTorch(world, new BlockPos(jailX + 6, jailY + 2, jailZ + 9));
 
         int petRoom = rand.nextInt(11);
 

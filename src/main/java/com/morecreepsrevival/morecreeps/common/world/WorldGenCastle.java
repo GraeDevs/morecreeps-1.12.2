@@ -5,6 +5,7 @@ import com.morecreepsrevival.morecreeps.common.entity.EntityCastleCritter;
 import com.morecreepsrevival.morecreeps.common.entity.EntityCastleGuard;
 import com.morecreepsrevival.morecreeps.common.entity.EntityCastleKing;
 import com.morecreepsrevival.morecreeps.common.entity.EntityMummy;
+import com.morecreepsrevival.morecreeps.common.helpers.CreepsUtil;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
@@ -427,15 +428,15 @@ public class WorldGenCastle extends WorldGenerator
         {
             for (int j = 6; j < 20; j += 3)
             {
-                world.setBlockState(new BlockPos(castlePosX + j, castlePosY + 4 + i, castlePosZ - 4), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + j, castlePosY + 4 + i, castlePosZ - 4));
 
-                world.setBlockState(new BlockPos(castlePosX + j, castlePosY + 4 + i, castlePosZ + 28), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + j, castlePosY + 4 + i, castlePosZ + 28));
 
                 if (j > 6 && j < 17)
                 {
-                    world.setBlockState(new BlockPos(castlePosX - 4, castlePosY + 4 + i, castlePosZ + j), Blocks.TORCH.getDefaultState());
+                    CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX - 4, castlePosY + 4 + i, castlePosZ + j));
 
-                    world.setBlockState(new BlockPos(castlePosX + 28, castlePosY + 4 + i, castlePosZ + j), Blocks.TORCH.getDefaultState());
+                    CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 28, castlePosY + 4 + i, castlePosZ + j));
                 }
             }
         }
@@ -463,13 +464,13 @@ public class WorldGenCastle extends WorldGenerator
             }
         }
 
-        world.setBlockState(new BlockPos(castlePosX + 9, castlePosY + 5, castlePosZ + 30), Blocks.TORCH.getDefaultState());
+        CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 9, castlePosY + 5, castlePosZ + 30));
 
-        world.setBlockState(new BlockPos(castlePosX + 16, castlePosY + 5, castlePosZ + 30), Blocks.TORCH.getDefaultState());
+        CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 16, castlePosY + 5, castlePosZ + 30));
 
-        world.setBlockState(new BlockPos(castlePosX + 9, castlePosY + 5, castlePosZ - 6), Blocks.TORCH.getDefaultState());
+        CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 9, castlePosY + 5, castlePosZ - 6));
 
-        world.setBlockState(new BlockPos(castlePosX + 16, castlePosY + 5, castlePosZ - 6), Blocks.TORCH.getDefaultState());
+        CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 16, castlePosY + 5, castlePosZ - 6));
 
         maxI = castleHeight * 7;
 
@@ -514,13 +515,13 @@ public class WorldGenCastle extends WorldGenerator
 
                 world.setBlockState(new BlockPos(castlePosX + 9 + j, castlePosY + i + 1, castlePosZ + 16), Blocks.DOUBLE_STONE_SLAB.getDefaultState());
 
-                world.setBlockState(new BlockPos(castlePosX + 9 + j, castlePosY + i + 2, castlePosZ + 16), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 9 + j, castlePosY + i + 2, castlePosZ + 16));
 
                 world.setBlockState(new BlockPos(castlePosX + 9 + j, castlePosY + i, castlePosZ + 8), Blocks.DOUBLE_STONE_SLAB.getDefaultState());
 
                 world.setBlockState(new BlockPos(castlePosX + 9 + j, castlePosY + i + 1, castlePosZ + 8), Blocks.DOUBLE_STONE_SLAB.getDefaultState());
 
-                world.setBlockState(new BlockPos(castlePosX + 9 + j, castlePosY + i + 2, castlePosZ + 8), Blocks.TORCH.getDefaultState());
+                CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 9 + j, castlePosY + i + 2, castlePosZ + 8));
             }
         }
 
@@ -907,13 +908,13 @@ public class WorldGenCastle extends WorldGenerator
                 }
             }
 
-            world.setBlockState(new BlockPos(castlePosX + 3, topY, castlePosZ - 6), Blocks.TORCH.getDefaultState());
+            CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 3, topY, castlePosZ - 6));
 
-            world.setBlockState(new BlockPos(castlePosX - 4, topY, castlePosZ - 6), Blocks.TORCH.getDefaultState());
+            CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX - 4, topY, castlePosZ - 6));
 
-            world.setBlockState(new BlockPos(castlePosX + 1, topY, castlePosZ - 4), Blocks.TORCH.getDefaultState());
+            CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX + 1, topY, castlePosZ - 4));
 
-            world.setBlockState(new BlockPos(castlePosX - 2, topY, castlePosZ - 4), Blocks.TORCH.getDefaultState());
+            CreepsUtil.TryPlaceTorch(world, new BlockPos(castlePosX - 2, topY, castlePosZ - 4));
 
             if (topFloor != 1)
             {
