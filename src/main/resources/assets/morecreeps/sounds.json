@@ -5967,6 +5967,27 @@
 			{
 				"name": "morecreeps:shurt",
 				"stream": false
+			},
+			{
+				"name": "morecreeps:shurt2",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:shurt3",
+				"stream": false
+			}
+		]
+	},
+	"sdeath": {
+		"category": "hostile",
+		"sounds": [
+			{
+				"name": "morecreeps:sdeath1",
+				"stream": false
+			},
+			{
+				"name": "morecreeps:sdeath2",
+				"stream": false
 			}
 		]
 	},

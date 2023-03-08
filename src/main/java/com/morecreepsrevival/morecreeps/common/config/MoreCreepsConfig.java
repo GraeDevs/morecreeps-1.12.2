@@ -135,6 +135,8 @@ public class MoreCreepsConfig
 
     public static int vhsSpawnAmt = 0;
 
+    public static int moneyManSSpawnAmt = 0;
+
     public static String hideUpdateGuiVersion = "";
 
     public static double globalSpawnRate = 1.0f;
@@ -273,6 +275,8 @@ public class MoreCreepsConfig
 
             ponyGirlSpawnAmt = config.get(spawnNbr, "Pony Girl", 5).getInt();
 
+            moneyManSSpawnAmt = config.get(spawnNbr, "Money Man S", 3).getInt();
+
             hideUpdateGuiVersion = config.get(miscProperty, "Hide Update for Version", "", "This property is set when you choose to ignore the Update Available popup with the version you're being offered.").getString();
 
             config.save();
@@ -293,6 +297,11 @@ public class MoreCreepsConfig
         if (unlimitedSpawn)
         {
             return;
+        }
+
+        if (moneyManSSpawnAmt < 0 || moneyManSSpawnAmt > 2)
+        {
+            moneyManSSpawnAmt = 1;
         }
 
         if (vhsSpawnAmt < 0 || vhsSpawnAmt > 4)

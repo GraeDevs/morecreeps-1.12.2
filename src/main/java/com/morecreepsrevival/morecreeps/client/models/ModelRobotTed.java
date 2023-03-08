@@ -3,16 +3,15 @@ package com.morecreepsrevival.morecreeps.client.models;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.util.Rotation;
 import net.minecraft.client.particle.ParticleBreaking;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.client.particle.Particle;
 
 import java.util.Random;
 
@@ -32,16 +31,16 @@ public class ModelRobotTed extends ModelBase
     public ModelRenderer eyeL;
     public ModelRenderer eyeR;
     public ModelRenderer visor;
+    public boolean heldItemLeft;
+    public boolean heldItemRight;
+    public boolean isSneak;
+
     long bouncePeriod = 100000, sugarPeriod = 25;
     long lastMS;
     float bounceDelta = 0f, sugarDelta = 0f;
     float lastOffsetModification = 0f;
 
     scala.util.Random sugarRandom = new scala.util.Random();
-
-    public boolean heldItemLeft;
-    public boolean heldItemRight;
-    public boolean isSneak;
 
     ModelRenderer[] models;
 
@@ -57,7 +56,6 @@ public class ModelRobotTed extends ModelBase
 
     public ModelRobotTed(float f, float f1)
     {
-
         float f2 = 0.0F;
         tedhead = new ModelRenderer(this, 0, 0);
         tedhead.addBox(-2.5F, -6F, -3F, 5, 6, 6, f2);
@@ -109,22 +107,22 @@ public class ModelRobotTed extends ModelBase
         visor.setRotationPoint(0.0F, 7F, 0.0F);
 
         models = new ModelRenderer[]
-        {
-            tedhead,
-            body,
-            body2,
-            legL,
-            legR,
-            arm1L,
-            arm1R,
-            arm2L,
-            arm2R,
-            hornL,
-            hornR,
-            eyeL,
-            eyeR,
-            visor
-        };
+                {
+                        tedhead,
+                        body,
+                        body2,
+                        legL,
+                        legR,
+                        arm1L,
+                        arm1R,
+                        arm2L,
+                        arm2R,
+                        hornL,
+                        hornR,
+                        eyeL,
+                        eyeR,
+                        visor
+                };
 
         lastMS = System.currentTimeMillis();
     }
@@ -155,7 +153,7 @@ public class ModelRobotTed extends ModelBase
 
         boolean wichLeg = true;
 
-        for(int i = 0; i < 4; ++i)
+        for(int i = 0; i < 6; ++i)
         {
             spawnSugar(shouldNotSugarSpawn, entity, sProgress, f3, wichLeg);
 
@@ -199,6 +197,7 @@ public class ModelRobotTed extends ModelBase
         arm2R.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 3F * f1 * 0.5F - 0.95F;
         arm2L.rotateAngleX = MathHelper.cos(f * 0.6662F) * 3F * f1 * 0.5F - 0.95F;
     }
+
     @SideOnly(Side.CLIENT)
     private void setBounce(float bounce)
     {
@@ -223,7 +222,7 @@ public class ModelRobotTed extends ModelBase
         double zVariation = (sugarRandom.nextInt(200) - 100) * 0.005;
 
         //float yaw = entity.rotationYaw + 1.5707963268f * (rightLeg ? 1f : -1f);
-        //double legAngleX = MathHelper.sin(yaw) * 0.75;a
+        //double legAngleX = MathHelper.sin(yaw) * 0.75;
         //double legAngleZ = MathHelper.cos(yaw) * 0.75;
 
 

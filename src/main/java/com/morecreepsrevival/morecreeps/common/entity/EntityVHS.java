@@ -1,8 +1,10 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
@@ -58,7 +60,10 @@ public class EntityVHS extends EntityCreepBase {
     @Override
     protected void dropItemsOnDeath()
     {
-
+        if (rand.nextInt(10) == 0)
+        {
+            dropItem(CreepsItemHandler.vhsTape, rand.nextInt(1) + 1);
+        }
     }
 
     @Override

@@ -42,7 +42,7 @@ public class EntitySnowDevil extends EntityCreepBase implements IMob
 
         creatureType = EnumCreatureType.MONSTER;
 
-        setSize(width * 1.6f, height * 1.6f);
+        setSize(width * 1.6f, height * 1f);
 
         baseHealth = (float)rand.nextInt(50) + 15.0f;
 
