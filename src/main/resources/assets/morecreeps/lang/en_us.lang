@@ -107,6 +107,7 @@ entity.morecreeps.rock_monster.name=Rock Monster
 entity.morecreeps.vhs.name=Walking VHS
 entity.morecreeps.s.name=S
 entity.morecreeps.desert_lizard.name=Desert Lizard
+entity.morecreeps.hunchbackskeleton.name=Hunchback Skeleton
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

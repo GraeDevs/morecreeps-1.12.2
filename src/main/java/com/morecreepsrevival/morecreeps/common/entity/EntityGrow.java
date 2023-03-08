@@ -71,8 +71,6 @@ public class EntityGrow extends EntityThrowable
     {
         this(world);
 
-        thrower = entity;
-
         setLocationAndAngles(entity.posX, entity.posY + (double)entity.getEyeHeight(), entity.posZ, entity.rotationYaw, entity.rotationPitch);
 
         posX -= MathHelper.cos((rotationYaw / 180.0f) * (float)Math.PI) * 0.16f;
@@ -281,22 +279,370 @@ public class EntityGrow extends EntityThrowable
             {
                 if (rtr.entityHit instanceof EntityLiving)
                 {
-                    Entity enthit = rtr.entityHit;
-
-                    if(enthit instanceof EntityCreepBase && enthit instanceof IEntityCanChangeSize)
+                    if (rtr.entityHit instanceof EntityKid)
                     {
-                        EntityCreepBase entcreep = (EntityCreepBase) enthit;
-                        IEntityCanChangeSize entsizeable = (IEntityCanChangeSize) enthit;
+                        EntityKid kid = (EntityKid)rtr.entityHit;
 
-                        if(entcreep.getModelSize() < entsizeable.maxGrowth() + growMax)
+                        if (kid.getModelSize() < 5.0f + growMax)
                         {
-                            entcreep.growModelSize(entsizeable.getGrowRayAmount() + growBonus);
-                            entsizeable.onGrow(this);
+                            kid.growModelSize(0.15f + growBonus);
                         }
                     }
+                    else if (rtr.entityHit instanceof EntityBigBaby)
+                    {
+                        EntityBigBaby bigBaby = (EntityBigBaby)rtr.entityHit;
 
+                        if (bigBaby.getModelSize() < 8.0f + growMax)
+                        {
+                            bigBaby.growModelSize(0.25f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityRatMan)
+                    {
+                        EntityRatMan ratMan = (EntityRatMan)rtr.entityHit;
+
+                        if (ratMan.getModelSize() < 3.0f + growMax)
+                        {
+                            ratMan.growModelSize(0.2f + growBonus);
+
+                            ratMan.increaseMoveSpeed(0.15f);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityGuineaPig)
+                    {
+                        EntityGuineaPig guineaPig = (EntityGuineaPig)rtr.entityHit;
+
+                        if (guineaPig.getModelSize() < 5.0f + growMax)
+                        {
+                            guineaPig.growModelSize(0.15f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityHotdog)
+                    {
+                        EntityHotdog hotdog = (EntityHotdog)rtr.entityHit;
+
+                        if (hotdog.getModelSize() < 5.0f + growMax)
+                        {
+                            hotdog.growModelSize(0.15f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityRobotTed)
+                    {
+                        EntityRobotTed robotTed = (EntityRobotTed)rtr.entityHit;
+
+                        if (robotTed.getModelSize() < 6.0f + growMax)
+                        {
+                            robotTed.growModelSize(0.25f + growBonus);
+
+                            robotTed.increaseMoveSpeed(0.15f);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityRobotTodd)
+                    {
+                        EntityRobotTodd robotTodd = (EntityRobotTodd)rtr.entityHit;
+
+                        if (robotTodd.getModelSize() < 4.0f + growMax)
+                        {
+                            robotTodd.growModelSize(0.25f + growBonus);
+
+                            robotTodd.increaseMoveSpeed(0.05f);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityGooGoat)
+                    {
+                        EntityGooGoat gooGoat = (EntityGooGoat)rtr.entityHit;
+
+                        if (gooGoat.getModelSize() < 3.0f + growMax)
+                        {
+                            gooGoat.growModelSize(0.24f + growBonus);
+
+                            gooGoat.increaseMoveSpeed(0.15f);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityLolliman)
+                    {
+                        EntityLolliman lolliman = (EntityLolliman)rtr.entityHit;
+
+                        if (lolliman.getModelSize() < 5.0f + growMax)
+                        {
+                            lolliman.growModelSize(0.25f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCastleCritter)
+                    {
+                        EntityCastleCritter castleCritter = (EntityCastleCritter)rtr.entityHit;
+
+                        if (castleCritter.getModelSize() < 4.0f + growMax)
+                        {
+                            castleCritter.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntitySneakySal)
+                    {
+                        EntitySneakySal sal = (EntitySneakySal)rtr.entityHit;
+
+                        if (sal.getModelSize() < 6.0f + growMax)
+                        {
+                            sal.growModelSize(0.2f + growBonus);
+
+                            sal.setDissedMax(0);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityArmyGuy)
+                    {
+                        EntityArmyGuy armyGuy = (EntityArmyGuy)rtr.entityHit;
+
+                        if (armyGuy.getModelSize() < 4.0f + growMax)
+                        {
+                            armyGuy.growModelSize(0.2f + growBonus);
+
+                            // TODO: set loyal to false
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityEvilChicken)
+                    {
+                        EntityEvilChicken evilChicken = (EntityEvilChicken)rtr.entityHit;
+
+                        if (evilChicken.getModelSize() < 5.0f + growMax)
+                        {
+                            evilChicken.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityBum)
+                    {
+                        EntityBum bum = (EntityBum)rtr.entityHit;
+
+                        if (bum.getModelSize() < 4.0f + growMax)
+                        {
+                            bum.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityBubbleScum)
+                    {
+                        EntityBubbleScum bubbleScum = (EntityBubbleScum)rtr.entityHit;
+
+                        if (bubbleScum.getModelSize() < 3.0f + growMax)
+                        {
+                            bubbleScum.growModelSize(0.15f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityLawyerFromHell)
+                    {
+                        EntityLawyerFromHell lawyerFromHell = (EntityLawyerFromHell)rtr.entityHit;
+
+                        if (lawyerFromHell.getModelSize() < 5.0f + growMax)
+                        {
+                            lawyerFromHell.growModelSize(0.2f + growBonus);
+
+                            // TODO: increase current fine by 50
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityG)
+                    {
+                        EntityG g = (EntityG)rtr.entityHit;
+
+                        if (g.getModelSize() < 5.0f + growMax)
+                        {
+                            g.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    // TODO: EntityRockMonster
+                    else if (rtr.entityHit instanceof EntityRockMonster)
+                    {
+                        EntityRockMonster rockMonster = (EntityRockMonster)rtr.entityHit;
+
+                        if (rockMonster.getModelSize() < 4.0f + growMax)
+                        {
+                            rockMonster.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityBlackSoul)
+                    {
+                        EntityBlackSoul blackSoul = (EntityBlackSoul)rtr.entityHit;
+
+                        if (blackSoul.getModelSize() < 4.0f + growMax)
+                        {
+                            blackSoul.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityBlorp)
+                    {
+                        EntityBlorp blorp = (EntityBlorp)rtr.entityHit;
+
+                        if (blorp.getModelSize() < 5.0f + growMax)
+                        {
+                            blorp.growModelSize(0.25f + growBonus);
+
+                            // TODO: set angry
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCamel)
+                    {
+                        EntityCamel camel = (EntityCamel)rtr.entityHit;
+
+                        if (camel.getModelSize() < 5.0f + growMax)
+                        {
+                            camel.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCamelJockey)
+                    {
+                        EntityCamelJockey camelJockey = (EntityCamelJockey)rtr.entityHit;
+
+                        if (camelJockey.getModelSize() < 4.0f + growMax)
+                        {
+                            camelJockey.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCastleGuard)
+                    {
+                        EntityCastleGuard castleGuard = (EntityCastleGuard)rtr.entityHit;
+
+                        if (castleGuard.getModelSize() < 4.0f + growMax)
+                        {
+                            castleGuard.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityCaveman)
+                    {
+                        EntityCaveman caveman = (EntityCaveman)rtr.entityHit;
+
+                        if (caveman.getModelSize() < 4.0f + growMax)
+                        {
+                            caveman.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    // TODO: EntityDesertLizard
+                    else if (rtr.entityHit instanceof EntityDigBug)
+                    {
+                        EntityDigBug digBug = (EntityDigBug)rtr.entityHit;
+
+                        if (digBug.getModelSize() < 4.0f + growMax)
+                        {
+                            digBug.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityEvilCreature)
+                    {
+                        EntityEvilCreature evilCreature = (EntityEvilCreature)rtr.entityHit;
+
+                        if (evilCreature.getModelSize() < 7.0f + growMax)
+                        {
+                            evilCreature.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityEvilPig)
+                    {
+                        EntityEvilPig evilPig = (EntityEvilPig)rtr.entityHit;
+
+                        if (evilPig.getModelSize() < 4.0f + growMax)
+                        {
+                            evilPig.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityEvilScientist)
+                    {
+                        EntityEvilScientist evilScientist = (EntityEvilScientist)rtr.entityHit;
+
+                        if (evilScientist.getModelSize() < 4.0f + growMax)
+                        {
+                            evilScientist.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityEvilSnowman)
+                    {
+                        EntityEvilSnowman evilSnowman = (EntityEvilSnowman)rtr.entityHit;
+
+                        if (evilSnowman.getModelSize() < 7.0f + growMax)
+                        {
+                            evilSnowman.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityFloob)
+                    {
+                        EntityFloob floob = (EntityFloob)rtr.entityHit;
+
+                        if (floob.getModelSize() < 5.0f + growMax)
+                        {
+                            floob.growModelSize(0.2f + growBonus);
+                        }
+                    }
                     // TODO: EntityHippo
+                    else if (rtr.entityHit instanceof EntityHunchback)
+                    {
+                        EntityHunchback hunchback = (EntityHunchback)rtr.entityHit;
+
+                        if (hunchback.getModelSize() < 5.0f + growMax)
+                        {
+                            hunchback.growModelSize(0.2f + growBonus);
+
+                            // TODO: set tamed to false
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityHunchbackSkeleton)
+                    {
+                        EntityHunchbackSkeleton hunchbackSkeleton = (EntityHunchbackSkeleton)rtr.entityHit;
+
+                        if (hunchbackSkeleton.getModelSize() < 5.0f + growMax)
+                        {
+                            hunchbackSkeleton.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityInvisibleMan)
+                    {
+                        EntityInvisibleMan invisMan = (EntityInvisibleMan)rtr.entityHit;
+
+                        if (invisMan.getModelSize() < 4.0f + growMax)
+                        {
+                            invisMan.growModelSize(0.2f + growBonus);
+                        }
+                    }
                     // TODO: EntityNonSwimmer
+                    else if (rtr.entityHit instanceof EntityRocketGiraffe)
+                    {
+                        EntityRocketGiraffe rocketGiraffe = (EntityRocketGiraffe)rtr.entityHit;
+
+                        if (rocketGiraffe.getModelSize() < 4.0f + growMax)
+                        {
+                            rocketGiraffe.growModelSize(0.15f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntitySnowDevil)
+                    {
+                        EntitySnowDevil snowDevil = (EntitySnowDevil)rtr.entityHit;
+
+                        if (snowDevil.getModelSize() < 4.0f + growMax)
+                        {
+                            snowDevil.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityThief)
+                    {
+                        EntityThief thief = (EntityThief)rtr.entityHit;
+
+                        if (thief.getModelSize() < 4.0f + growMax)
+                        {
+                            thief.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityVHS)
+                    {
+                        EntityVHS vhs = (EntityVHS)rtr.entityHit;
+
+                        if (vhs.getModelSize() < 4.0f + growMax)
+                        {
+                            vhs.growModelSize(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityZebra)
+                    {
+                        EntityZebra zebra = (EntityZebra)rtr.entityHit;
+
+                        if (zebra.getModelSize() < 5.0f + growMax)
+                        {
+                            zebra.growModelSize(0.2f + growBonus);
+                        }
+                    }
 
                     playSound(CreepsSoundHandler.raygunSound, 0.2F, 1.0F / (rand.nextFloat() * 0.1F + 0.95F));
 
