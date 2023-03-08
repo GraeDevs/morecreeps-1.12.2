@@ -304,7 +304,7 @@ public class MoreCreepsConfig
             moneyManSSpawnAmt = 1;
         }
 
-        if (vhsSpawnAmt < 0 || vhsSpawnAmt > 4)
+        if (vhsSpawnAmt < 0 || vhsSpawnAmt > 8)
         {
             vhsSpawnAmt = 2;
         }
@@ -324,19 +324,19 @@ public class MoreCreepsConfig
             bigBabySpawnAmt = 5;
         }
 
-        if (blorpSpawnAmt < 0 || blorpSpawnAmt > 12)
+        if (blorpSpawnAmt < 0 || blorpSpawnAmt > 8)
         {
-            blorpSpawnAmt = 7;
+            blorpSpawnAmt = 3;
         }
 
-        if (bubbleScumSpawnAmt < 0 || bubbleScumSpawnAmt > 12)
+        if (bubbleScumSpawnAmt < 0 || bubbleScumSpawnAmt > 8)
         {
-            bubbleScumSpawnAmt = 6;
+            bubbleScumSpawnAmt = 3;
         }
 
-        if (bumSpawnAmt < 0 || bumSpawnAmt > 12)
+        if (bumSpawnAmt < 0 || bumSpawnAmt > 6)
         {
-            bumSpawnAmt = 6;
+            bumSpawnAmt = 2;
         }
 
         if (camelSpawnAmt < 0 || camelSpawnAmt > 12)
@@ -364,17 +364,17 @@ public class MoreCreepsConfig
             digBugSpawnAmt = 7;
         }
 
-        if (evilScientistSpawnAmt < 0 || evilScientistSpawnAmt > 12)
+        if (evilScientistSpawnAmt < 0 || evilScientistSpawnAmt > 8)
         {
-            evilScientistSpawnAmt = 7;
+            evilScientistSpawnAmt = 3;
         }
 
-        if (floobSpawnAmt < 0 || floobShipSpawnAmt > 12)
+        if (floobSpawnAmt < 0 || floobShipSpawnAmt > 8)
         {
-            floobSpawnAmt = 7;
+            floobSpawnAmt = 3;
         }
 
-        if (floobShipSpawnAmt < 0 || floobShipSpawnAmt > 12)
+        if (floobShipSpawnAmt < 0 || floobShipSpawnAmt > 4)
         {
             floobShipSpawnAmt = 2;
         }
@@ -399,9 +399,9 @@ public class MoreCreepsConfig
             hippoSpawnAmt = 7;
         }
 
-        if (horseHeadSpawnAmt < 0 || horseHeadSpawnAmt > 12)
+        if (horseHeadSpawnAmt < 0 || horseHeadSpawnAmt > 10)
         {
-            horseHeadSpawnAmt = 7;
+            horseHeadSpawnAmt = 3;
         }
 
         if (hunchbackSpawnAmt < 0 || hunchbackSpawnAmt > 12)
@@ -419,9 +419,9 @@ public class MoreCreepsConfig
             kidSpawnAmt = 5;
         }
 
-        if (lawyerFromHellSpawnAmt < 0 || lawyerFromHellSpawnAmt > 12)
+        if (lawyerFromHellSpawnAmt < 0 || lawyerFromHellSpawnAmt > 7)
         {
-            lawyerFromHellSpawnAmt = 7;
+            lawyerFromHellSpawnAmt = 3;
         }
 
         if (lollimanSpawnAmt < 0 || lollimanSpawnAmt > 12)
@@ -466,7 +466,7 @@ public class MoreCreepsConfig
 
         if (rockMonsterSpawnAmt < 0 || rockMonsterSpawnAmt > 5)
         {
-            rockMonsterSpawnAmt = 1;
+            rockMonsterSpawnAmt = 3;
         }
 
         if (rocketGiraffeSpawnAmt < 0 || rocketGiraffeSpawnAmt > 12)
@@ -479,9 +479,9 @@ public class MoreCreepsConfig
             snowDevilSpawnAmt = 7;
         }
 
-        if (thiefSpawnAmt < 0 || thiefSpawnAmt > 12)
+        if (thiefSpawnAmt < 0 || thiefSpawnAmt > 6)
         {
-            thiefSpawnAmt = 7;
+            thiefSpawnAmt = 3;
         }
 
         if (zebraSpawnAmt < 0 || zebraSpawnAmt > 12)
@@ -489,9 +489,9 @@ public class MoreCreepsConfig
             zebraSpawnAmt = 6;
         }
 
-        if (growbotGreggSpawnAmt < 0 || growbotGreggSpawnAmt > 12)
+        if (growbotGreggSpawnAmt < 0 || growbotGreggSpawnAmt > 6)
         {
-            growbotGreggSpawnAmt = 6;
+            growbotGreggSpawnAmt = 2;
         }
 
         if (ponyGirlSpawnAmt < 0 || ponyGirlSpawnAmt > 10)

@@ -2,7 +2,6 @@ package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
@@ -42,7 +41,7 @@ public class EntityDesertLizard extends EntityCreepBase {
 
         baseHealth = 15.0f;
 
-        setSize(2f, 0.75f);
+        setSize(1.75f, 0.75f);
 
         baseSpeed = 0.25d;
 
@@ -81,12 +80,6 @@ public class EntityDesertLizard extends EntityCreepBase {
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
     }
-
-    /*public float getEyeHeight()
-    {
-        return 0.25F;
-    }*/
-
     public class AILizardFireballAttack extends EntityAIBase {
 
         public int fireballTime;
@@ -118,11 +111,11 @@ public class EntityDesertLizard extends EntityCreepBase {
                 if (d1 < d * d && d1 > 10D) {
                    if(fireballTime <= 0) {
                        double d2 = entityLivingBase.posX - posX;
-                       double d3 = (entityLivingBase.getEntityBoundingBox().minY + (double) (entityLivingBase.height / 2.0F)) - (posY + (double) (height / 2.0F));
+                       double d3 = (entityLivingBase.getEntityBoundingBox().minY + (double) (entityLivingBase.height / 1.0F)) - (posY + (double) (height / 1.0F));
                        double d4 = (entityLivingBase.posZ - posZ) + 0.5D;
                        renderYawOffset = rotationYaw = (-(float) Math.atan2(d2, d4) * 180F) / (float) Math.PI;
                        EntityDesertLizardFireball fireball = new EntityDesertLizardFireball(world, parentEntity, d2, d3, d4);
-                       double d5 = 4D;
+                       double d5 = 2D;
                        Vec3d vec3d = parentEntity.getLook(1.0F);
                        fireball.posX = posX + vec3d.x * d5;
                        fireball.posY = posY + (double) (height / 2.0F) + 0.5D;
