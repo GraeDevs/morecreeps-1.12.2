@@ -1,6 +1,6 @@
 Authors & Credits
 -------------------------------------------
-Freakstritch, Shawn Wilson, Grae, Kylie, 
+Freakstritch, Shawn Wilson, Grae, Kylie, Guliver Jham 
 
 -------------------------------------------
 Source installation information for modders
