@@ -11,12 +11,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import java.util.Random;
 
-/**
- * Creeps util, made by the helper Guliver Jham to speed up development
- * (same guy that made ModelRobotTed bounce and sugar).
- *
- * Made to be a container for a great diversity of helper methods.
- */
 public class CreepsUtil {
     static final float fullRadian = 3.1415926536F;
 
