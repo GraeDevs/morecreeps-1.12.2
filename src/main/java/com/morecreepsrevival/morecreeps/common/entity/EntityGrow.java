@@ -286,6 +286,7 @@ public class EntityGrow extends EntityThrowable
                         if (kid.getModelSize() < 5.0f + growMax)
                         {
                             kid.growModelSize(0.15f + growBonus);
+                            kid.getEntityBoundingBox().grow(0.15f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityBigBaby)
@@ -295,6 +296,7 @@ public class EntityGrow extends EntityThrowable
                         if (bigBaby.getModelSize() < 8.0f + growMax)
                         {
                             bigBaby.growModelSize(0.25f + growBonus);
+                            bigBaby.getEntityBoundingBox().grow(0.25f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityRatMan)
@@ -304,6 +306,7 @@ public class EntityGrow extends EntityThrowable
                         if (ratMan.getModelSize() < 3.0f + growMax)
                         {
                             ratMan.growModelSize(0.2f + growBonus);
+                            ratMan.getEntityBoundingBox().grow(0.2f + growBonus);
 
                             ratMan.increaseMoveSpeed(0.15f);
                         }
@@ -315,6 +318,7 @@ public class EntityGrow extends EntityThrowable
                         if (guineaPig.getModelSize() < 5.0f + growMax)
                         {
                             guineaPig.growModelSize(0.15f + growBonus);
+                            guineaPig.getEntityBoundingBox().grow(0.15f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityHotdog)
@@ -324,6 +328,7 @@ public class EntityGrow extends EntityThrowable
                         if (hotdog.getModelSize() < 5.0f + growMax)
                         {
                             hotdog.growModelSize(0.15f + growBonus);
+                            hotdog.getEntityBoundingBox().grow(0.15f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityRobotTed)
@@ -333,6 +338,7 @@ public class EntityGrow extends EntityThrowable
                         if (robotTed.getModelSize() < 6.0f + growMax)
                         {
                             robotTed.growModelSize(0.25f + growBonus);
+                            robotTed.getEntityBoundingBox().grow(0.25f + growBonus);
 
                             robotTed.increaseMoveSpeed(0.15f);
                         }
@@ -344,6 +350,7 @@ public class EntityGrow extends EntityThrowable
                         if (robotTodd.getModelSize() < 4.0f + growMax)
                         {
                             robotTodd.growModelSize(0.25f + growBonus);
+                            robotTodd.getEntityBoundingBox().grow(0.25f + growBonus);
 
                             robotTodd.increaseMoveSpeed(0.05f);
                         }
@@ -355,6 +362,7 @@ public class EntityGrow extends EntityThrowable
                         if (gooGoat.getModelSize() < 3.0f + growMax)
                         {
                             gooGoat.growModelSize(0.24f + growBonus);
+                            gooGoat.getEntityBoundingBox().grow(0.24f + growBonus);
 
                             gooGoat.increaseMoveSpeed(0.15f);
                         }
@@ -366,6 +374,7 @@ public class EntityGrow extends EntityThrowable
                         if (lolliman.getModelSize() < 5.0f + growMax)
                         {
                             lolliman.growModelSize(0.25f + growBonus);
+                            lolliman.getEntityBoundingBox().grow(0.25f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityCastleCritter)
@@ -375,6 +384,7 @@ public class EntityGrow extends EntityThrowable
                         if (castleCritter.getModelSize() < 4.0f + growMax)
                         {
                             castleCritter.growModelSize(0.2f + growBonus);
+                            castleCritter.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntitySneakySal)
@@ -384,6 +394,7 @@ public class EntityGrow extends EntityThrowable
                         if (sal.getModelSize() < 6.0f + growMax)
                         {
                             sal.growModelSize(0.2f + growBonus);
+                            sal.getEntityBoundingBox().grow(0.2f + growBonus);
 
                             sal.setDissedMax(0);
                         }
@@ -395,6 +406,7 @@ public class EntityGrow extends EntityThrowable
                         if (armyGuy.getModelSize() < 4.0f + growMax)
                         {
                             armyGuy.growModelSize(0.2f + growBonus);
+                            armyGuy.getEntityBoundingBox().grow(0.2f + growBonus);
 
                             // TODO: set loyal to false
                         }
@@ -406,6 +418,7 @@ public class EntityGrow extends EntityThrowable
                         if (evilChicken.getModelSize() < 5.0f + growMax)
                         {
                             evilChicken.growModelSize(0.2f + growBonus);
+                            evilChicken.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityBum)
@@ -415,15 +428,18 @@ public class EntityGrow extends EntityThrowable
                         if (bum.getModelSize() < 4.0f + growMax)
                         {
                             bum.growModelSize(0.2f + growBonus);
+                            bum.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityBubbleScum)
                     {
                         EntityBubbleScum bubbleScum = (EntityBubbleScum)rtr.entityHit;
 
-                        if (bubbleScum.getModelSize() < 3.0f + growMax)
+                        if (bubbleScum.getModelSize() < 5.0f + growMax)
                         {
                             bubbleScum.growModelSize(0.15f + growBonus);
+                            bubbleScum.getEntityBoundingBox().grow(0.15f + growBonus);
+
                         }
                     }
                     else if (rtr.entityHit instanceof EntityLawyerFromHell)
@@ -433,6 +449,7 @@ public class EntityGrow extends EntityThrowable
                         if (lawyerFromHell.getModelSize() < 5.0f + growMax)
                         {
                             lawyerFromHell.growModelSize(0.2f + growBonus);
+                            lawyerFromHell.getEntityBoundingBox().grow(0.25f + growBonus);
 
                             // TODO: increase current fine by 50
                         }
@@ -444,25 +461,27 @@ public class EntityGrow extends EntityThrowable
                         if (g.getModelSize() < 5.0f + growMax)
                         {
                             g.growModelSize(0.2f + growBonus);
+                            g.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
-                    // TODO: EntityRockMonster
                     else if (rtr.entityHit instanceof EntityRockMonster)
                     {
                         EntityRockMonster rockMonster = (EntityRockMonster)rtr.entityHit;
 
-                        if (rockMonster.getModelSize() < 4.0f + growMax)
+                        if (rockMonster.getModelSize() < 5.0f + growMax)
                         {
                             rockMonster.growModelSize(0.2f + growBonus);
+                            rockMonster.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityBlackSoul)
                     {
                         EntityBlackSoul blackSoul = (EntityBlackSoul)rtr.entityHit;
 
-                        if (blackSoul.getModelSize() < 4.0f + growMax)
+                        if (blackSoul.getModelSize() < 5.0f + growMax)
                         {
                             blackSoul.growModelSize(0.2f + growBonus);
+                            blackSoul.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityBlorp)
@@ -472,6 +491,7 @@ public class EntityGrow extends EntityThrowable
                         if (blorp.getModelSize() < 5.0f + growMax)
                         {
                             blorp.growModelSize(0.25f + growBonus);
+                            blorp.getEntityBoundingBox().grow(0.25f + growBonus);
 
                             // TODO: set angry
                         }
@@ -483,6 +503,7 @@ public class EntityGrow extends EntityThrowable
                         if (camel.getModelSize() < 5.0f + growMax)
                         {
                             camel.growModelSize(0.2f + growBonus);
+                            camel.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityCamelJockey)
@@ -492,6 +513,7 @@ public class EntityGrow extends EntityThrowable
                         if (camelJockey.getModelSize() < 4.0f + growMax)
                         {
                             camelJockey.growModelSize(0.2f + growBonus);
+                            camelJockey.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityCastleGuard)
@@ -501,6 +523,7 @@ public class EntityGrow extends EntityThrowable
                         if (castleGuard.getModelSize() < 4.0f + growMax)
                         {
                             castleGuard.growModelSize(0.2f + growBonus);
+                            castleGuard.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityCaveman)
@@ -510,16 +533,18 @@ public class EntityGrow extends EntityThrowable
                         if (caveman.getModelSize() < 4.0f + growMax)
                         {
                             caveman.growModelSize(0.2f + growBonus);
+                            caveman.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     // TODO: EntityDesertLizard
-                    else if (rtr.entityHit instanceof EntityDigBug)
+                    else if (rtr.entityHit instanceof EntityDesertLizard)
                     {
-                        EntityDigBug digBug = (EntityDigBug)rtr.entityHit;
+                        EntityDesertLizard lizard = (EntityDesertLizard)rtr.entityHit;
 
-                        if (digBug.getModelSize() < 4.0f + growMax)
+                        if (lizard.getModelSize() < 4.0f + growMax)
                         {
-                            digBug.growModelSize(0.2f + growBonus);
+                            lizard.growModelSize(0.2f + growBonus);
+                            lizard.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityEvilCreature)
@@ -529,6 +554,7 @@ public class EntityGrow extends EntityThrowable
                         if (evilCreature.getModelSize() < 7.0f + growMax)
                         {
                             evilCreature.growModelSize(0.2f + growBonus);
+                            evilCreature.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityEvilPig)
@@ -538,6 +564,7 @@ public class EntityGrow extends EntityThrowable
                         if (evilPig.getModelSize() < 4.0f + growMax)
                         {
                             evilPig.growModelSize(0.2f + growBonus);
+                            evilPig.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityEvilScientist)
@@ -547,6 +574,7 @@ public class EntityGrow extends EntityThrowable
                         if (evilScientist.getModelSize() < 4.0f + growMax)
                         {
                             evilScientist.growModelSize(0.2f + growBonus);
+                            evilScientist.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityEvilSnowman)
@@ -556,6 +584,7 @@ public class EntityGrow extends EntityThrowable
                         if (evilSnowman.getModelSize() < 7.0f + growMax)
                         {
                             evilSnowman.growModelSize(0.2f + growBonus);
+                            evilSnowman.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityFloob)
@@ -565,6 +594,7 @@ public class EntityGrow extends EntityThrowable
                         if (floob.getModelSize() < 5.0f + growMax)
                         {
                             floob.growModelSize(0.2f + growBonus);
+                            floob.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     // TODO: EntityHippo
@@ -586,6 +616,7 @@ public class EntityGrow extends EntityThrowable
                         if (hunchbackSkeleton.getModelSize() < 5.0f + growMax)
                         {
                             hunchbackSkeleton.growModelSize(0.2f + growBonus);
+                            hunchbackSkeleton.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityInvisibleMan)
@@ -595,6 +626,7 @@ public class EntityGrow extends EntityThrowable
                         if (invisMan.getModelSize() < 4.0f + growMax)
                         {
                             invisMan.growModelSize(0.2f + growBonus);
+                            invisMan.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     // TODO: EntityNonSwimmer
@@ -614,6 +646,7 @@ public class EntityGrow extends EntityThrowable
                         if (snowDevil.getModelSize() < 4.0f + growMax)
                         {
                             snowDevil.growModelSize(0.2f + growBonus);
+                            snowDevil.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityThief)
@@ -623,6 +656,7 @@ public class EntityGrow extends EntityThrowable
                         if (thief.getModelSize() < 4.0f + growMax)
                         {
                             thief.growModelSize(0.2f + growBonus);
+                            thief.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityVHS)
@@ -632,6 +666,17 @@ public class EntityGrow extends EntityThrowable
                         if (vhs.getModelSize() < 4.0f + growMax)
                         {
                             vhs.growModelSize(0.2f + growBonus);
+                            vhs.getEntityBoundingBox().grow(0.2f + growBonus);
+                        }
+                    }
+                    else if (rtr.entityHit instanceof EntityS)
+                    {
+                        EntityS s = (EntityS)rtr.entityHit;
+
+                        if (s.getModelSize() < 4.0f + growMax)
+                        {
+                            s.growModelSize(0.2f + growBonus);
+                            s.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
                     else if (rtr.entityHit instanceof EntityZebra)
@@ -641,6 +686,7 @@ public class EntityGrow extends EntityThrowable
                         if (zebra.getModelSize() < 5.0f + growMax)
                         {
                             zebra.growModelSize(0.2f + growBonus);
+                            zebra.getEntityBoundingBox().grow(0.2f + growBonus);
                         }
                     }
 

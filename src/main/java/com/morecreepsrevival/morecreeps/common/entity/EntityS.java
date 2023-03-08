@@ -25,7 +25,7 @@ public class EntityS extends EntityCreepBase implements IMob {
         setCreepTypeName("Money Man S");
         creatureType = EnumCreatureType.MONSTER;
 
-        setSize(width * 2.0f, height * 2.5f);
+        setSize(width * 4f, height * 2.5f);
 
         setModelSize(2.0f);
 
