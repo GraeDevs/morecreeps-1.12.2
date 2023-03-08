@@ -1,6 +1,5 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
-import com.morecreepsrevival.morecreeps.common.MoreCreepsAndWeirdos;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
@@ -8,9 +7,10 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityRobotTed extends EntityCreepBase implements IMob
 {
@@ -36,6 +36,8 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
         floattimer = 0;
 
         updateAttributes();
+
+
     }
 
     @Override
@@ -54,6 +56,8 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
         nodeProcessor.setCanSwim(true);
 
         nodeProcessor.setCanEnterDoors(true);
+
+
 
         tasks.addTask(1, new EntityAISwimming(this));
 
@@ -77,6 +81,9 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
 
         targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityRobotTodd.class, true));
     }
+
+
+
     @Override
     public float getEyeHeight()
     {

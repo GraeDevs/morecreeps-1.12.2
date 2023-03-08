@@ -3,13 +3,11 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -136,7 +134,7 @@ public class EntityInvisibleMan extends EntityCreepBase {
 
     private void becomeAngryAt(Entity entity) {
         this.setAttackTarget((EntityLivingBase)entity);
-        angerLevel += 120 + rand.nextInt(120);
+        angerLevel += 40 + rand.nextInt(40);
         dataManager.set(anger, true);
     }
     @Override
@@ -209,4 +207,3 @@ public class EntityInvisibleMan extends EntityCreepBase {
         dropItem(Items.APPLE, 1);
     }
 }
-
