@@ -14,7 +14,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityG extends EntityCreepBase implements IMob
+public class EntityG extends EntityCreepBase implements IMob, IEntityCanChangeSize
 {
     public EntityG(World worldIn)
     {
@@ -239,5 +239,21 @@ public class EntityG extends EntityCreepBase implements IMob
         {
             dropItem(Items.GHAST_TEAR, rand.nextInt(2) + 1);
         }
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

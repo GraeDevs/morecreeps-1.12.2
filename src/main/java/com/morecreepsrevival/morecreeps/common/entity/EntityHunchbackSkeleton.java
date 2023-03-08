@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityHunchbackSkeleton extends EntityCreepBase implements IRangedAttackMob
+public class EntityHunchbackSkeleton extends EntityCreepBase implements IRangedAttackMob, IEntityCanChangeSize
 {
     private static final DataParameter<Integer> timeLeft = EntityDataManager.createKey(EntityHunchbackSkeleton.class, DataSerializers.VARINT);
 
@@ -224,5 +224,21 @@ public class EntityHunchbackSkeleton extends EntityCreepBase implements IRangedA
     public void setSwingingArms(boolean swingingArms)
     {
         dataManager.set(SWINGING_ARMS, Boolean.valueOf(swingingArms));
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

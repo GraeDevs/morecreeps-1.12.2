@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityFloob extends EntityCreepBase implements IRangedAttackMob, IMob
+public class EntityFloob extends EntityCreepBase implements IRangedAttackMob, IMob, IEntityCanChangeSize
 {
     public EntityFloob(World worldIn)
     {
@@ -127,5 +127,21 @@ public class EntityFloob extends EntityCreepBase implements IRangedAttackMob, IM
     @Override
     public void setSwingingArms(boolean swingingArms)
     {
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityLawyerFromHell extends EntityCreepBase implements IMob
+public class EntityLawyerFromHell extends EntityCreepBase implements IMob, IEntityCanChangeSize
 {
     private static final DataParameter<Boolean> undead = EntityDataManager.<Boolean>createKey(EntityLawyerFromHell.class, DataSerializers.BOOLEAN);
 
@@ -469,5 +469,37 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob
         smoke2();
 
         super.onDeath(cause);
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+        EntityLivingBase raythrower = source.getThrower();
+
+        if(raythrower == null || !(raythrower instanceof EntityPlayer)) return;
+
+        EntityPlayer playerTarget = (EntityPlayer) raythrower;
+
+        ILawyerFine capability = playerTarget.getCapability(LawyerFineProvider.capability, null);
+
+        if (capability != null)
+        {
+            capability.addFine(50);
+
+            if (!world.isRemote)
+            {
+                CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(capability.getFine()), (EntityPlayerMP)playerTarget);
+            }
+        }
     }
 }

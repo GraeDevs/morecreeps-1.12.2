@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityDigBug extends EntityCreepBase
+public class EntityDigBug extends EntityCreepBase implements IEntityCanChangeSize
 {
     private static final DataParameter<Integer> lifespan = EntityDataManager.createKey(EntityDigBug.class, DataSerializers.VARINT);
 
@@ -615,5 +615,21 @@ public class EntityDigBug extends EntityCreepBase
         {
             dataManager.set(holePos, new BlockPos(props.getDouble("HolePosX"), props.getDouble("HolePosY"), props.getDouble("HolePosZ")));
         }
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

@@ -22,7 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class EntityHotdog extends EntityCreepBase
+public class EntityHotdog extends EntityCreepBase implements  IEntityCanChangeSize
 {
     private static final DataParameter<Boolean> heavenBuilt = EntityDataManager.<Boolean>createKey(EntityHotdog.class, DataSerializers.BOOLEAN);
 
@@ -823,5 +823,21 @@ public class EntityHotdog extends EntityCreepBase
     public boolean canBeRevived()
     {
         return true;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.15F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

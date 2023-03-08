@@ -25,7 +25,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class EntityGuineaPig extends EntityCreepBase
+public class EntityGuineaPig extends EntityCreepBase implements  IEntityCanChangeSize
 {
     private static final DataParameter<Boolean> hotelBuilt = EntityDataManager.<Boolean>createKey(EntityGuineaPig.class, DataSerializers.BOOLEAN);
 
@@ -842,5 +842,21 @@ public class EntityGuineaPig extends EntityCreepBase
     public boolean canBeRevived()
     {
         return true;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.15F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

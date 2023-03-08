@@ -11,7 +11,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityVHS extends EntityCreepBase {
+public class EntityVHS extends EntityCreepBase implements IEntityCanChangeSize {
 
     public EntityVHS(World worldIn)
     {
@@ -82,5 +82,21 @@ public class EntityVHS extends EntityCreepBase {
     protected SoundEvent getDeathSound()
     {
         return CreepsSoundHandler.vhsDeath;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

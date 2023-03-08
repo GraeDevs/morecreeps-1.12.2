@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityRockMonster extends EntityCreepBase {
+public class EntityRockMonster extends EntityCreepBase implements IEntityCanChangeSize {
 
     public EntityRockMonster(World worldIn)
     {
@@ -147,6 +147,22 @@ public class EntityRockMonster extends EntityCreepBase {
     protected SoundEvent getHurtSound(DamageSource damageSource)
     {
         return CreepsSoundHandler.rockMonsterHurt;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 
 }

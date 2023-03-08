@@ -2,6 +2,7 @@ package com.morecreepsrevival.morecreeps.common.entity;
 
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityGooGoat extends EntityCreepBase
+public class EntityGooGoat extends EntityCreepBase implements IEntityCanChangeSize
 {
     private static final DataParameter<Integer> hungryTime = EntityDataManager.createKey(EntityGooGoat.class, DataSerializers.VARINT);
 
@@ -198,5 +199,21 @@ public class EntityGooGoat extends EntityCreepBase
     public boolean getHungry()
     {
         return ((Boolean)dataManager.get(hungry)).booleanValue();
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 3.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.25F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+        this.increaseMoveSpeed(0.15f);
     }
 }

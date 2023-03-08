@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
+public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob, IEntityCanChangeSize
 {
     private static final DataParameter<Integer> dissedMax = EntityDataManager.createKey(EntitySneakySal.class, DataSerializers.VARINT);
 
@@ -536,5 +536,22 @@ public class EntitySneakySal extends EntityCreepBase implements IRangedAttackMob
     public int getDissedMax()
     {
         return dataManager.get(dissedMax);
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source)
+    {
+        this.setDissedMax(0);
     }
 }
