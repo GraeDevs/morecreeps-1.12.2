@@ -288,7 +288,9 @@ public class EntityGrow extends EntityThrowable
 
                         if(entcreep.getModelSize() < entsizeable.maxGrowth() + growMax)
                         {
-                            entcreep.growModelSize(entsizeable.getGrowRayAmount() + growBonus);
+                            float growth = entsizeable.getGrowRayAmount() + growBonus;
+                            entcreep.growModelSize(growth);
+                            entcreep.growHitboxSize(growth);
                             entsizeable.onGrow(this);
                         }
                     }

@@ -24,8 +24,10 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.NodeProcessor;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
@@ -34,6 +36,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.vecmath.Vector2f;
 import java.lang.reflect.Constructor;
 import java.util.UUID;
 
@@ -1323,6 +1326,16 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
     public void growModelSize(float f)
     {
         setModelSize(Math.max(0.0f, getModelSize() + f));
+    }
+
+    public void growHitboxSize(float f)
+    {
+        float wd = width, hg = height;
+
+        Vector2f normalized = new Vector2f(wd, hg);
+        normalized.normalize();
+
+        setSize(wd + normalized.x * (f * 2), hg + normalized.y * (f * 2));
     }
 
     public void decreaseMoveSpeed(float f)
