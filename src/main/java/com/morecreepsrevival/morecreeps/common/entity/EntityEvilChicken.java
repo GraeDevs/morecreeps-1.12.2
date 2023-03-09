@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityEvilChicken extends EntityCreepBase implements IMob
+public class EntityEvilChicken extends EntityCreepBase implements IMob, IEntityCanChangeSize
 {
     public float wingRotation;
     public float destPos;
@@ -148,5 +148,21 @@ public class EntityEvilChicken extends EntityCreepBase implements IMob
     protected void playStepSound(BlockPos pos, Block blockIn)
     {
         this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

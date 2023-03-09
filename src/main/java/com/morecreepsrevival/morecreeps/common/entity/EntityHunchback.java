@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityHunchback extends EntityCreepBase
+public class EntityHunchback extends EntityCreepBase implements IEntityCanChangeSize
 {
     private static final DataParameter<Integer> cakeTimer = EntityDataManager.createKey(EntityHunchback.class, DataSerializers.VARINT);
 
@@ -305,5 +305,26 @@ public class EntityHunchback extends EntityCreepBase
         }
 
         return health;
+    }
+
+    private void setUntamed()
+    {
+        //TODO: implement this.
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+        if(this.isTamed()) this.setUntamed();
     }
 }

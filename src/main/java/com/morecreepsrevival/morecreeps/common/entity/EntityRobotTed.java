@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityRobotTed extends EntityCreepBase implements IMob
+public class EntityRobotTed extends EntityCreepBase implements IMob, IEntityCanChangeSize
 {
 
     public int floattimer;
@@ -122,5 +122,21 @@ public class EntityRobotTed extends EntityCreepBase implements IMob
     protected SoundEvent getDeathSound()
     {
         return CreepsSoundHandler.tedDeadSound;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 6.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.15F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+        this.increaseMoveSpeed(0.15f);
     }
 }

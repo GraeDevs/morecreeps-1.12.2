@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityBlorp extends EntityCreepBase
+public class EntityBlorp extends EntityCreepBase implements IEntityCanChangeSize
 {
     private static final DataParameter<Boolean> hungry = EntityDataManager.<Boolean>createKey(EntityBlorp.class, DataSerializers.BOOLEAN);
 
@@ -338,5 +338,21 @@ public class EntityBlorp extends EntityCreepBase
     protected boolean shouldJumpWhileAttacking(Entity entity)
     {
         return true;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.25F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

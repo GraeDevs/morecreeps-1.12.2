@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityDesertLizard extends EntityCreepBase {
+public class EntityDesertLizard extends EntityCreepBase implements IEntityCanChangeSize {
     private static final String[] textures = {
             "textures/entity/desertlizard1",
             "textures/entity/desertlizard2",
@@ -165,6 +165,22 @@ public class EntityDesertLizard extends EntityCreepBase {
     protected SoundEvent getAmbientSound()
     {
         return CreepsSoundHandler.desertLizard;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 
 }

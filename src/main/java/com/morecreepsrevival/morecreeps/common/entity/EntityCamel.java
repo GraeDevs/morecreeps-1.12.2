@@ -31,7 +31,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityCamel extends EntityCreepBase
+public class EntityCamel extends EntityCreepBase implements IEntityCanChangeSize
 {
     private static final String[] textures = {
             "textures/entity/camel",
@@ -516,5 +516,21 @@ public class EntityCamel extends EntityCreepBase
     protected SoundEvent getTamedSound()
     {
         return CreepsSoundHandler.guineaPigLevelUpSound;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

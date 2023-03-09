@@ -10,7 +10,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class EntityRobotTodd extends EntityCreepBase implements IMob
+public class EntityRobotTodd extends EntityCreepBase implements IMob, IEntityCanChangeSize
 {
     public EntityRobotTodd(World worldIn)
     {
@@ -99,5 +99,21 @@ public class EntityRobotTodd extends EntityCreepBase implements IMob
     protected SoundEvent getDeathSound()
     {
         return CreepsSoundHandler.toddDeadSound;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.25F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+        this.increaseMoveSpeed(0.05f);
     }
 }

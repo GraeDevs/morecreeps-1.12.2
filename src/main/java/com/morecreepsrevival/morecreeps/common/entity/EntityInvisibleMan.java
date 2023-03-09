@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class EntityInvisibleMan extends EntityCreepBase {
+public class EntityInvisibleMan extends EntityCreepBase implements IEntityCanChangeSize {
     private static final DataParameter<Boolean> anger = EntityDataManager.<Boolean>createKey(EntityInvisibleMan.class, DataSerializers.BOOLEAN);
 
     private int angerLevel;
@@ -205,5 +205,21 @@ public class EntityInvisibleMan extends EntityCreepBase {
     {
         dropItem(Items.STICK, 3);
         dropItem(Items.APPLE, 1);
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

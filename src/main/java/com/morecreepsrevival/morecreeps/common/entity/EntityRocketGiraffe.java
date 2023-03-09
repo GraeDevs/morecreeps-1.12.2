@@ -29,7 +29,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityRocketGiraffe extends EntityCreepBase
+public class EntityRocketGiraffe extends EntityCreepBase implements IEntityCanChangeSize
 {
     private static final String[] names = {
             "Rory", "Stan", "Clarence", "FirePower", "Lightning", "Rocket Jockey", "Rocket Ralph", "Tim"
@@ -497,5 +497,21 @@ public class EntityRocketGiraffe extends EntityCreepBase
     public Entity getControllingPassenger()
     {
         return getFirstPassenger();
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.15F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

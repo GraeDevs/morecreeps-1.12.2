@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityCastleGuard extends EntityCreepBase implements IMob
+public class EntityCastleGuard extends EntityCreepBase implements IMob, IEntityCanChangeSize
 {
     private static final DataParameter<Boolean> attacked = EntityDataManager.<Boolean>createKey(EntityCastleGuard.class, DataSerializers.BOOLEAN);
 
@@ -156,5 +156,21 @@ public class EntityCastleGuard extends EntityCreepBase implements IMob
     public boolean getCanSpawnHere()
     {
         return true;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

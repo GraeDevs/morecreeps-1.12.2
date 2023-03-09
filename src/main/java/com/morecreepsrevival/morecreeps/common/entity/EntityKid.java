@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityKid extends EntityCreepBase
+public class EntityKid extends EntityCreepBase implements IEntityCanChangeSize
 {
     private static final DataParameter<Integer> checkTimer = EntityDataManager.createKey(EntityKid.class, DataSerializers.VARINT);
 
@@ -232,5 +232,21 @@ public class EntityKid extends EntityCreepBase
         {
             dropItem(Items.WHEAT, rand.nextInt(3) + 1);
         }
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.15F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

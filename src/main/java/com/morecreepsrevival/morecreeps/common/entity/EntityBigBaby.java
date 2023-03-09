@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityBigBaby extends EntityCreepBase implements IMob
+public class EntityBigBaby extends EntityCreepBase implements IMob, IEntityCanChangeSize
 {
     private static final DataParameter<Integer> skin = EntityDataManager.createKey(EntityBigBaby.class, DataSerializers.VARINT);
 
@@ -241,5 +241,21 @@ public class EntityBigBaby extends EntityCreepBase implements IMob
     private boolean getSkinDirection()
     {
         return ((Boolean)dataManager.get(skinDirection)).booleanValue();
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 8.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.25F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

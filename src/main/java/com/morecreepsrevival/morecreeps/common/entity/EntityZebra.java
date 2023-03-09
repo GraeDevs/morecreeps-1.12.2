@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class EntityZebra extends EntityCreepBase
+public class EntityZebra extends EntityCreepBase implements IEntityCanChangeSize
 {
     private static final String[] names = {
             "Stanley", "Cid", "Hunchy", "The Heat", "Herman the Hump", "Dr. Hump", "Little Lousie", "Spoony G", "Mixmaster C", "The Maestro",
@@ -469,5 +469,21 @@ public class EntityZebra extends EntityCreepBase
     protected SoundEvent getTamedSound()
     {
         return CreepsSoundHandler.guineaPigLevelUpSound;
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 5.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }

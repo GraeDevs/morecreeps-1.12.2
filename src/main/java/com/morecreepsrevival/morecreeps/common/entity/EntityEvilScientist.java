@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class EntityEvilScientist extends EntityCreepBase implements IMob
+public class EntityEvilScientist extends EntityCreepBase implements IMob, IEntityCanChangeSize
 {
     private static final DataParameter<Integer> stage = EntityDataManager.createKey(EntityEvilScientist.class, DataSerializers.VARINT);
 
@@ -858,5 +858,21 @@ public class EntityEvilScientist extends EntityCreepBase implements IMob
         }
 
         return super.canDespawn();
+    }
+
+    @Override
+    public float maxGrowth() {
+        return 4.0f;
+    }
+
+    @Override
+    public float getGrowRayAmount()
+    {
+        return 0.2F;
+    }
+
+    @Override
+    public void onGrow(EntityGrow source) {
+
     }
 }
