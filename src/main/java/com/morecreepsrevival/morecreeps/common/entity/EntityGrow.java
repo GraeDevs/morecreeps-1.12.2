@@ -283,15 +283,16 @@ public class EntityGrow extends EntityThrowable
 
                     if(enthit instanceof EntityCreepBase && enthit instanceof IEntityCanChangeSize)
                     {
-                        EntityCreepBase entcreep = (EntityCreepBase) enthit;
-                        IEntityCanChangeSize entsizeable = (IEntityCanChangeSize) enthit;
+                        EntityCreepBase entityCreep = (EntityCreepBase) enthit;
+                        IEntityCanChangeSize entitySizeable = (IEntityCanChangeSize) enthit;
 
-                        if(entcreep.getModelSize() < entsizeable.maxGrowth() + growMax)
+                        if(entityCreep.getModelSize() < entitySizeable.maxGrowth() + growMax)
                         {
-                            float growth = entsizeable.getGrowRayAmount() + growBonus;
-                            entcreep.growModelSize(growth);
-                            entcreep.growHitboxSize(growth);
-                            entsizeable.onGrow(this);
+                            float growth = entitySizeable.getGrowRayAmount() + growBonus;
+                            entityCreep.growModelSize(growth);
+                            entityCreep.growHitboxSize(growth);
+
+                            entitySizeable.onGrow(this);
                         }
                     }
 

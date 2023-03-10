@@ -134,7 +134,7 @@ public class EntityInvisibleMan extends EntityCreepBase implements IEntityCanCha
 
     private void becomeAngryAt(Entity entity) {
         this.setAttackTarget((EntityLivingBase)entity);
-        angerLevel += 40 + rand.nextInt(40);
+        angerLevel += 80 + rand.nextInt(80);
         dataManager.set(anger, true);
     }
     @Override
@@ -207,6 +207,16 @@ public class EntityInvisibleMan extends EntityCreepBase implements IEntityCanCha
         dropItem(Items.APPLE, 1);
     }
 
+    @Override
+    public float maxShrink() { return 0.4f; }
+
+    @Override
+    public float getShrinkRayAmount() { return 0.2f; }
+
+    @Override
+    public void onShrink(EntityShrink source) {
+
+    }
     @Override
     public float maxGrowth() {
         return 4.0f;

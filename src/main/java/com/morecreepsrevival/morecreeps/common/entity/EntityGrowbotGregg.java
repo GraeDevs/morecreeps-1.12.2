@@ -201,10 +201,10 @@ public class EntityGrowbotGregg extends EntityCreepBase
     protected void dropEquipment(boolean wasRecentlyHit, int lootingModifier)
     {
     }
-
     @Override
     protected void dropItemsOnDeath()
     {
         dropItem(CreepsItemHandler.growbotGrowRay, 1);
     }
+
 }

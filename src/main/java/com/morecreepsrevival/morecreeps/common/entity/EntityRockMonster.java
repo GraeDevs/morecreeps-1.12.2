@@ -29,7 +29,7 @@ public class EntityRockMonster extends EntityCreepBase implements IEntityCanChan
         setSize(2f, 2f);
         getEntityBoundingBox().offset(0d, 0d, 0d);
 
-        baseSpeed = 0.35d;
+        baseSpeed = 0.25d;
         baseHealth = 60f;
 
         baseAttackDamage = 4f;
@@ -108,12 +108,12 @@ public class EntityRockMonster extends EntityCreepBase implements IEntityCanChan
                     this.rockM.attackEntityAsMob(entitylivingbase);
                 }
 
-                this.rockM.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.65D);
+                this.rockM.getMoveHelper().setMoveTo(entitylivingbase.posX, entitylivingbase.posY, entitylivingbase.posZ, 0.45D);
             }
             else if (d0 < 256.0D)
             {
                 this.rockM.getLookHelper().setLookPositionWithEntity(this.rockM.getAttackTarget(), 30.0F, 30.0F);
-                this.rockM.getMoveHelper().setMoveTo(this.rockM.getAttackTarget().posX, this.rockM.getAttackTarget().posY, this.rockM.getAttackTarget().posZ, 0.65D);
+                this.rockM.getMoveHelper().setMoveTo(this.rockM.getAttackTarget().posX, this.rockM.getAttackTarget().posY, this.rockM.getAttackTarget().posZ, 0.45D);
 
             }
         }
@@ -149,6 +149,16 @@ public class EntityRockMonster extends EntityCreepBase implements IEntityCanChan
         return CreepsSoundHandler.rockMonsterHurt;
     }
 
+    @Override
+    public float maxShrink() { return 0.4f; }
+
+    @Override
+    public float getShrinkRayAmount() { return 0.2f; }
+
+    @Override
+    public void onShrink(EntityShrink source) {
+
+    }
     @Override
     public float maxGrowth() {
         return 4.0f;

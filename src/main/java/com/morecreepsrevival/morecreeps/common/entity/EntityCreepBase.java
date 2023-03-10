@@ -1335,7 +1335,17 @@ public class EntityCreepBase extends EntityCreature implements IEntityOwnable
         Vector2f normalized = new Vector2f(wd, hg);
         normalized.normalize();
 
-        setSize(wd + normalized.x * (f * 2), hg + normalized.y * (f * 2));
+        setSize(wd + (f * 2), hg + (f * 2));
+    }
+
+    public void shrinkHitboxSize(float f)
+    {
+        float wd = width, hg = height;
+
+        Vector2f normalized = new Vector2f(wd, hg);
+        normalized.normalize();
+
+        setSize(wd - (f / 2), hg - (f / 2));
     }
 
     public void decreaseMoveSpeed(float f)

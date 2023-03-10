@@ -313,6 +313,16 @@ public class EntityHunchback extends EntityCreepBase implements IEntityCanChange
     }
 
     @Override
+    public float maxShrink() { return 0.5f; }
+
+    @Override
+    public float getShrinkRayAmount() { return 0.2f; }
+
+    @Override
+    public void onShrink(EntityShrink source) {
+
+    }
+    @Override
     public float maxGrowth() {
         return 5.0f;
     }

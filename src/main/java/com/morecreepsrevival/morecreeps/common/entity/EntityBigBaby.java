@@ -244,6 +244,16 @@ public class EntityBigBaby extends EntityCreepBase implements IMob, IEntityCanCh
     }
 
     @Override
+    public float maxShrink() { return 0.5f; }
+
+    @Override
+    public float getShrinkRayAmount() { return 0.25f; }
+
+    @Override
+    public void onShrink(EntityShrink source) {
+
+    }
+    @Override
     public float maxGrowth() {
         return 8.0f;
     }

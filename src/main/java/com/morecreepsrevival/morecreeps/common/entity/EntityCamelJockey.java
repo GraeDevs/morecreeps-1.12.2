@@ -173,6 +173,17 @@ public class EntityCamelJockey extends EntityCreepBase implements IEntityCanChan
     }
 
     @Override
+    public float maxShrink() { return 0.4f; }
+
+    @Override
+    public float getShrinkRayAmount() { return 0.2f; }
+
+    @Override
+    public void onShrink(EntityShrink source) {
+
+    }
+
+    @Override
     public float maxGrowth() {
         return 4.0f;
     }

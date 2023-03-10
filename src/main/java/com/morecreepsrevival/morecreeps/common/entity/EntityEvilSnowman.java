@@ -278,6 +278,16 @@ public class EntityEvilSnowman extends EntityCreepBase implements IMob, IEntityC
     }
 
     @Override
+    public float maxShrink() { return 0.7f; }
+
+    @Override
+    public float getShrinkRayAmount() { return 0.2f; }
+
+    @Override
+    public void onShrink(EntityShrink source) {
+
+    }
+    @Override
     public float maxGrowth() {
         return 7.0f;
     }

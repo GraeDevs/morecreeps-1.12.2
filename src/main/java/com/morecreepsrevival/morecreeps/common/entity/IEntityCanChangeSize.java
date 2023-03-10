@@ -13,4 +13,19 @@ public interface IEntityCanChangeSize {
      * What happens when this entity grows.
      */
     void onGrow (EntityGrow source);
+
+    /**
+     * The smallest size this entity can be.
+     */
+    float maxShrink();
+
+    /**
+     * The amount a shrink ray shrinks this entity when it hits.
+     */
+    float getShrinkRayAmount();
+
+    /**
+     * What happens when this entity shrinks.
+     */
+    void onShrink(EntityShrink source);
 }

@@ -472,6 +472,32 @@ public class EntityLawyerFromHell extends EntityCreepBase implements IMob, IEnti
     }
 
     @Override
+    public float maxShrink() { return 0.5f; }
+
+    @Override
+    public float getShrinkRayAmount() { return 0.2f; }
+
+    @Override
+    public void onShrink(EntityShrink source) {
+        EntityLivingBase raythrower = source.getThrower();
+
+        if(raythrower == null || !(raythrower instanceof EntityPlayer)) return;
+
+        EntityPlayer playerTarget = (EntityPlayer) raythrower;
+
+        ILawyerFine capability = playerTarget.getCapability(LawyerFineProvider.capability, null);
+
+        if (capability != null)
+        {
+            capability.addFine(50);
+
+            if (!world.isRemote)
+            {
+                CreepsPacketHandler.INSTANCE.sendTo(new MessageSetLawyerFine(capability.getFine()), (EntityPlayerMP)playerTarget);
+            }
+        }
+    }
+    @Override
     public float maxGrowth() {
         return 5.0f;
     }
