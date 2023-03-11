@@ -280,12 +280,12 @@ public class EntityShrink extends EntityThrowable
                 if (rtr.entityHit instanceof EntityLiving)
                 {
                     boolean flag = false;
-                    Entity entityHit = rtr.entityHit;
+                    Entity Hit = rtr.entityHit;
 
-                    if(entityHit instanceof EntityCreepBase && entityHit instanceof  IEntityCanChangeSize) {
+                    if(Hit instanceof EntityCreepBase && Hit instanceof  IEntityCanChangeSize) {
 
-                        EntityCreepBase entityCreep = (EntityCreepBase) entityHit;
-                        IEntityCanChangeSize entitySizable = (IEntityCanChangeSize) entityHit;
+                        EntityCreepBase entityCreep = (EntityCreepBase) Hit;
+                        IEntityCanChangeSize entitySizable = (IEntityCanChangeSize) Hit;
 
                         if(entityCreep.getModelSize() > entitySizable.maxShrink()) {
                             float shrink = entitySizable.getShrinkRayAmount();
