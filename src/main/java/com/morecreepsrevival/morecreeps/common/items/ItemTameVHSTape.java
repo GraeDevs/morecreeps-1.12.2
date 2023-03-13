@@ -9,10 +9,10 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-public class ItemVHSTape extends CreepsItem {
+public class ItemTameVHSTape extends CreepsItem {
 
-    public ItemVHSTape() {
-        super("vhstape");
+    public ItemTameVHSTape() {
+        super("vhstape2");
         setMaxStackSize(64);
     }
 }

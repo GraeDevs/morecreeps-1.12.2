@@ -49,6 +49,7 @@ item.morecreeps.lucky_dress.name=Lucky Dress
 item.morecreeps.medicine.name=Medicine
 item.morecreeps.pee_bucket.name=Pee Bucket
 item.morecreeps.vhstape.name=VHS Tape
+item.morecreeps.vhstape2.name=VHS Tape 2
 item.morecreeps.vhammer.name=VHS Hammer
 
 # Entities
@@ -108,6 +109,7 @@ entity.morecreeps.vhs.name=Walking VHS
 entity.morecreeps.s.name=S
 entity.morecreeps.desert_lizard.name=Desert Lizard
 entity.morecreeps.hunchbackskeleton.name=Hunchback Skeleton
+entity.morecreeps.hippo.name=Hippo
 
 # Creative Tabs
 itemGroup.creepsTab=More Creeps

@@ -196,14 +196,16 @@ public class MoreCreepsAndWeirdos
                 createEntity(EntityGrow.class, "grow", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntityCamelJockey.class, "cameljockey", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.camelJockeySpawnAmt), 1, 2, EnumCreatureType.CREATURE, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityInvisibleMan.class, "invisible_man", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.invisibleManSpawnAmt), 1, 1, EnumCreatureType.MONSTER,0xFFFFFF, 0xFF0000, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
-                createEntity(EntityPonyGirl.class, "ponygirl", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.ponyGirlSpawnAmt), 1, 1, EnumCreatureType.CREATURE/*, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)*/),
+                createEntity(EntityPonyGirl.class, "ponygirl", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.ponyGirlSpawnAmt), 1, 1, EnumCreatureType.CREATURE, 0x74706A, 0x373532/*, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)*/),
                 createEntity(EntityPony.class, "pony", 0, 0, 0, EnumCreatureType.CREATURE),
                 createEntity(EntityPonyCloud.class, "ponycloud", 0, 0, 0, EnumCreatureType.AMBIENT),
                 createEntity(EntityRockMonster.class, "rock_monster", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.rockMonsterSpawnAmt), 1, 1, EnumCreatureType.MONSTER, 0x74706A, 0x373532,  getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityVHS.class, "vhs", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.vhsSpawnAmt), 1, 1, EnumCreatureType.MONSTER, 0x858585, 0x4D4D4D,  getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityS.class, "s", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.moneyManSSpawnAmt), 1, 1, EnumCreatureType.MONSTER, 0x1F1F1F, 0x87AE73,  getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END)),
                 createEntity(EntityDesertLizard.class, "desert_lizard", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.desertLizardSpawnAmt), 1, 1, EnumCreatureType.MONSTER, 0x1C5300, 0x609445, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END,
-                        Type.FOREST, Type.VOID, Type.CONIFEROUS, Type.PLAINS, Type.MUSHROOM))
+                        Type.FOREST, Type.VOID, Type.CONIFEROUS, Type.PLAINS, Type.MUSHROOM)),
+                createEntity(EntityHippo.class, "hippo", MoreCreepsConfig.calculateSpawnRate(MoreCreepsConfig.hippoSpawnAmt),1 , 1, EnumCreatureType.CREATURE, 0x858585, 0x4D4D4D, getBiomesNotType(Type.COLD, Type.SNOWY, Type.NETHER, Type.END,
+                        Type.FOREST, Type.VOID, Type.CONIFEROUS, Type.PLAINS, Type.MUSHROOM, Type.DRY, Type.VOID, Type.SAVANNA, Type.JUNGLE, Type.MOUNTAIN, Type.WASTELAND))
         );
     }
 

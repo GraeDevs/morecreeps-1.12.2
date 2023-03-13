@@ -1,6 +1,8 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
+import com.morecreepsrevival.morecreeps.client.render.layer.RenderLayerBlackSoulGlow;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +16,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -33,7 +37,7 @@ public class EntityPonyCloud extends EntityCreepBase
 
         setCreepTypeName("Pony Cloud");
 
-        setSize(width * 0.8f, height * 1.3f);
+        setSize(width * 0.8f, height * 0.5f);
 
         setModelSize(2.0f);
 
@@ -115,14 +119,12 @@ public class EntityPonyCloud extends EntityCreepBase
         }
 
         Entity firstPassenger = getFirstPassenger();
-
         if (firstPassenger == null && !getDelivered())
         {
             setDead();
         }
 
         double xHeading = -MathHelper.sin(rotationYaw * (float)Math.PI / 180.0f);
-
         double zHeading = MathHelper.cos(rotationYaw * (float)Math.PI / 180.0f);
 
         for (int x = 0; x < 5; x++)
@@ -137,26 +139,36 @@ public class EntityPonyCloud extends EntityCreepBase
                 if (!world.isAirBlock(new BlockPos(posX, posY - 1, posZ)))
                 {
                     firstPassenger.dismountRidingEntity();
-
                     playSound(CreepsSoundHandler.ponyPopOffSound, getSoundVolume(), getSoundPitch());
-
                     playSound(SoundEvents.BLOCK_LAVA_POP, 0.9f, getSoundPitch());
-
                     setDelivered(true);
-
-                    smoke();
+                    for (int j = 0; j < 10; j++)
+                    {
+                        world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, rand.nextGaussian() * 0.02D, rand.nextGaussian() * 0.02D, rand.nextGaussian() * 0.02D);
+                    }
                 }
                 else
                 {
                     motionY = -0.2d;
+                    for (int j = 0; j < 2; j++)
+                    {
+                        world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height * 4.0f), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, rand.nextGaussian() * 0.2D, rand.nextGaussian() * 0.08D, rand.nextGaussian() * 0.04D);
+                    }
                 }
             }
         }
         else if (getDelivered())
         {
-            motionY = 0.5d;
+            motionY = -0.05d;
+            for (int j = 0; j < 2; j++)
+            {
+                world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height * 4.0f), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, rand.nextGaussian() * 0.2D, rand.nextGaussian() * 0.08D, rand.nextGaussian() * 0.04D);
+            }
+            setModelSize(getModelSize() - 0.050f);
+            if(getModelSize() < 0.25f) {
+                setDead();
+            }
         }
-
         if (posY > 128.0d)
         {
             setDead();

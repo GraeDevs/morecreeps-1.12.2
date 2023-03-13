@@ -67,11 +67,11 @@ public class ModelFloob extends ModelBiped
         bipedLeftArm.setRotationPoint(3F, 2.0F + f1, 0.0F);
         bipedRightLeg = new ModelRenderer(this, 0, 18);
         bipedRightLeg.addBox(-2F, -4F, -2F, 3, 16, 3, f);
-        bipedRightLeg.setRotationPoint(-2F, 12F, 0.0F);
+        bipedRightLeg.setRotationPoint(-2F, 14F, 0.0F);
         bipedLeftLeg = new ModelRenderer(this, 0, 18);
         bipedLeftLeg.mirror = true;
         bipedLeftLeg.addBox(-2F, -4F, -2F, 3, 16, 3, f);
-        bipedLeftLeg.setRotationPoint(3F, 12F, 0.0F);
+        bipedLeftLeg.setRotationPoint(3F, 14F, 0.0F);
     }
 
     @Override

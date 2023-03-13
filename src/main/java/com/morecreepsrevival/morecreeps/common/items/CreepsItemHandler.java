@@ -143,6 +143,8 @@ public class CreepsItemHandler
 
     public static final Item vhsTape = new ItemVHSTape();
 
+    public static final Item vhsTape2 = new ItemTameVHSTape();
+
     public static final Item vHammer = new ItemVhammer();
 
     @SubscribeEvent
@@ -205,6 +207,7 @@ public class CreepsItemHandler
                 medicine,
                 luckyDress,
                 vhsTape,
+                vhsTape2,
                 vHammer
         );
     }

@@ -297,6 +297,8 @@ public class CreepsSoundHandler
 
     public static final SoundEvent horseHeadSound = createSound("horsehead");
 
+    public static final SoundEvent hippoAmbientSound = createSound("hippo");
+
     public static final SoundEvent hippoHurtSound = createSound("hippohurt");
 
     public static final SoundEvent hippoDeathSound = createSound("hippodeath");
@@ -585,6 +587,8 @@ public class CreepsSoundHandler
     public static final SoundEvent vhsDeath = createSound("vhsdeath");
 
     public static final SoundEvent vhsHammer = createSound("vhshammer");
+
+    public static final SoundEvent vhsInsert = createSound("vhsinsert");
 
     public static final SoundEvent sAmbient = createSound("sambient");
 
@@ -897,6 +901,7 @@ public class CreepsSoundHandler
                 vhsHurt,
                 vhsDeath,
                 vhsHammer,
+                vhsInsert,
                 sHurt,
                 sAmbient,
                 sDeath,

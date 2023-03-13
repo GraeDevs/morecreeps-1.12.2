@@ -5999,5 +5999,14 @@
 				"stream": false
 			}
 		]
+	},
+	"vhsinsert": {
+		"category": "player",
+		"sounds": [
+			{
+				"name": "morecreeps:vhsinsert",
+				"stream": false
+			}
+		]
 	}
 }

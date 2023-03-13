@@ -23,7 +23,7 @@
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": {
-          "type": "morecreeps:goo_goat"
+          "type": "morecreeps:googoat"
         }
       }
     }
