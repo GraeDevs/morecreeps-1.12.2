@@ -3,7 +3,10 @@ package com.morecreepsrevival.morecreeps.common.entity;
 import com.morecreepsrevival.morecreeps.common.helpers.InventoryHelper;
 import com.morecreepsrevival.morecreeps.common.items.CreepsItemHandler;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
+import net.minecraft.client.model.ModelSlime;
+import net.minecraft.client.renderer.entity.RenderSlime;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -144,7 +147,6 @@ public class EntityPonyGirl extends EntityCreepBase
 
                     setCellPhone(true);
                 }
-
                 return true;
             }
             else if (item == CreepsItemHandler.money && getCellPhone())
@@ -173,16 +175,11 @@ public class EntityPonyGirl extends EntityCreepBase
                     }
 
                     double xHeading = -MathHelper.sin(player.rotationYaw * (float)Math.PI / 180.0f);
-
                     double zHeading = MathHelper.cos(player.rotationYaw * (float)Math.PI / 180.0f);
-
                     EntityPonyCloud ponyCloud = new EntityPonyCloud(world);
-
                     ponyCloud.setInitialHealth();
-
                     ponyCloud.determineBaseTexture();
-
-                    ponyCloud.setLocationAndAngles(player.posX + xHeading * 2.0d, 100.0d, player.posZ + zHeading * 2.0d, player.rotationYaw, 0.0f);
+                    ponyCloud.setLocationAndAngles(player.posX + xHeading * 2.0d, 150.0d, player.posZ + zHeading * 2.0d, player.rotationYaw, 0.0f);
 
                     if (!world.isRemote)
                     {
@@ -190,15 +187,10 @@ public class EntityPonyGirl extends EntityCreepBase
                     }
 
                     EntityPony pony = new EntityPony(world);
-
                     pony.setInitialHealth();
-
                     pony.determineBaseTexture();
-
                     pony.setLocationAndAngles(player.posX + xHeading * 2.0d, 100.0d, player.posZ + zHeading * 2.0d, player.rotationYaw, 0.0f);
-
                     pony.startRiding(ponyCloud, true);
-
                     pony.tame(player);
 
                     // TODO: figure out this part

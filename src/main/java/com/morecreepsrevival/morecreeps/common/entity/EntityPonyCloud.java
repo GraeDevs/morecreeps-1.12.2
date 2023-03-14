@@ -1,11 +1,8 @@
 package com.morecreepsrevival.morecreeps.common.entity;
 
-import com.morecreepsrevival.morecreeps.client.render.layer.RenderLayerBlackSoulGlow;
 import com.morecreepsrevival.morecreeps.common.sounds.CreepsSoundHandler;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -16,8 +13,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
@@ -101,6 +96,18 @@ public class EntityPonyCloud extends EntityCreepBase
     }
 
     @Override
+    public void updatePassenger(@Nonnull Entity passenger) {
+        if(isPassenger(passenger) && passenger instanceof EntityPony) {
+            passenger.setPosition(posX, posY + 2.5d, posZ);
+        }
+    }
+
+    @Override
+    public boolean isEntityInvulnerable(@Nonnull DamageSource damageSource) {
+        return true;
+    }
+
+    @Override
     public void onLivingUpdate()
     {
         motionX = 0.0d;
@@ -150,10 +157,6 @@ public class EntityPonyCloud extends EntityCreepBase
                 else
                 {
                     motionY = -0.2d;
-                    for (int j = 0; j < 2; j++)
-                    {
-                        world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height * 4.0f), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, rand.nextGaussian() * 0.2D, rand.nextGaussian() * 0.08D, rand.nextGaussian() * 0.04D);
-                    }
                 }
             }
         }
@@ -165,13 +168,9 @@ public class EntityPonyCloud extends EntityCreepBase
                 world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, (posX + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, posY + (double)(rand.nextFloat() * height * 4.0f), (posZ + (double)(rand.nextFloat() * width * 2.0F)) - (double)width, rand.nextGaussian() * 0.2D, rand.nextGaussian() * 0.08D, rand.nextGaussian() * 0.04D);
             }
             setModelSize(getModelSize() - 0.050f);
-            if(getModelSize() < 0.25f) {
+            if(getModelSize() < 0.15f) {
                 setDead();
             }
-        }
-        if (posY > 128.0d)
-        {
-            setDead();
         }
 
         super.onLivingUpdate();
